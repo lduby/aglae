@@ -2,13 +2,20 @@
 
 <h1>New Member Form</h1>
 <script>
+function display_member_details() {
+  $("#memberlist a").click(
+    $url=this.attr("href");
+    $("#memberdetails").load($url+"/ajshow");
+  )
+}
 $(document).ready(function() {
  $("#MemberFormSubmit").click(
   function () {  
     $.ajax({type:'POST', url: '/members/ajcreate', data:$('#new_member').serialize(), success: function(response) {
       $('#notice').html(response);
       $('#memberform').empty();
-      $('#memberslist').load("/members/list");
+      $('#memberslist').load("/members/list", display_member_details);
+      
     }});
     
     return false;

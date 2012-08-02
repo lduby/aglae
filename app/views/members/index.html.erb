@@ -1,10 +1,30 @@
 <script>
+function display_member_details() {
+  $("#memberslist a").click(function(event) {
+    event.preventDefault();
+    $url=$(this).attr("href");
+    $("#memberdetails").load($url);
+  })
+}
+
+function new_member_div() {
+  $("#newmemberdiv a").click(function(event) {
+    event.preventDefault();
+  })
+}
+
 $(document).ready(function() {
  $("#newmemberdiv").click(
-  function () {  
-    $("#memberform").load("/members/test");
+  function () {
+    if   ($("#memberform").text() == "") {
+      $("#memberform").load("/members/test");
+    } else {
+      $("#memberform").empty();
+    }
    }
   )
+  display_member_details();
+  new_member_div();
  });
 </script>
 
@@ -19,11 +39,11 @@ No members found
 <% end %>
 </ul>
 </div>
-<%= link_to 'New Member', new_member_path %>
-<div id="newmemberdiv"><a id="newmemberbutton" href="#">New Member</a></div>
+<div id="newmemberdiv"><a id="newmemberbutton" href="<%= new_member_path %>">New Member</a></div>
 
-<div id="memberform" >
-</div>
+<div id="memberform" class="form"></div>
+
+<div id="memberdetails" class="details"></div>
 
 <br/>
 

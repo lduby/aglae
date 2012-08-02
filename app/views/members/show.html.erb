@@ -2,5 +2,33 @@
 <p><%= @member.address+" "+@member.zipcode+" "+@member.city %></p>
 <p><%= "Telephone: "+@member.phone %></p>
 <p><%= "Type: "+@member.member_type %></p>
-
+<div id="childrenlist">
+<h2>Children</h2>
+<ul>
+<% if @member.children.size == 0 %>
+No children found
+<% end %>
+<% @member.children.each do |memberchild| %>
+<li><%= link_to memberchild.lastname+" "+memberchild.firstname, memberchild %></li>
+<% end %>
+</ul>
+</div>
+<div id="newmemberchilddiv"><a id="newmemberchildbutton" href="<%= new_child_path %>">New Child</a></div>
+<div id="memberchildform" class="form"></div>
 <%= link_to "Back to list", members_path %>
+<script>
+$(document).ready(function() {
+  $("#newmemberchilddiv").click(
+    function () {
+      if ($("#memberchildform").text() == "") {
+        $("#memberchildform").load("/members/child/ajnew");
+      } else {
+        $("#memberchildform").empty();
+      }
+    }
+  )
+  $("#newmemberchilddiv a").click(function(event) {
+    event.preventDefault();
+  }
+});
+</script>

@@ -1,0 +1,36 @@
+
+
+<h1>New Member Child Form</h1>
+<script>
+function display_child_details() {
+  $("#childrenlist a").click(
+    $url=this.attr("href");
+    $("#childdetails").load($url+"/ajshow");
+  )
+}
+$(document).ready(function() {
+ $("#MemberChildFormSubmit").click(
+  function () {  
+    $.ajax({type:'POST', url: '/children/ajcreate', data:$('#new_member_child').serialize(), success: function(response) {
+      $('#notice').html(response);
+      $('#memberchildform').empty();
+      $('#childrenlist').load("/children/list", display_child_details);
+      
+    }});
+    
+    return false;
+   }
+  )
+ });
+</script>
+
+<%= form_for @child do |f| %>
+<table>
+<tr><td><%= f.label :lastname, "Lastname" %></td><td><%= f.text_field :lastname %></td></tr>
+<tr><td><%= f.label :firstname, "firstname" %></td><td><%= f.text_field :firstname %></td></tr>
+<tr><td><%= f.label :birthdate, "birthdate" %></td><td><%= f.date_select :birthdate %></td></tr>
+</table>
+<%= f.submit "Create", :id => "MemberChildFormSubmit" %>
+<% end %>
+
+

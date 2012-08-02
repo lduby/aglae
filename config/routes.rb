@@ -5,6 +5,7 @@ Aglae::Application.routes.draw do
   post 'members/ajcreate'
   
   resources :members
+  resources :children
   resources :games
   
 

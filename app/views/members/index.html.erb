@@ -17,9 +17,14 @@ $(document).ready(function() {
  $("#newmemberdiv").click(
   function () {
     if   ($("#memberform").text() == "") {
-      $("#memberform").load("/members/test");
+      $("#memberform").hide();
+      $("#memberform").load("/members/test", function(responseText, statusText, xhr) {
+          $("#memberform").slideToggle();
+        });
+      
     } else {
-      $("#memberform").empty();
+      $("#memberform").slideToggle('slow', function () {$("#memberform").empty();});
+      
     }
    }
   )

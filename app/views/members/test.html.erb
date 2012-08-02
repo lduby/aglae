@@ -4,8 +4,10 @@
 <script>
 function display_member_details() {
   $("#memberlist a").click(
-    $url=this.attr("href");
-    $("#memberdetails").load($url+"/ajshow");
+    function() {
+      url=this.attr("href");
+      $("#memberdetails").load(url+"/ajshow");
+    }
   )
 }
 $(document).ready(function() {

@@ -24,6 +24,11 @@ class MembersController < ApplicationController
     render :layout => false
   end 
 
+  def jsshow
+    @member = Member.find(params['id'])
+    render :show, :layout => false
+  end
+  
   def edit
   end
 
@@ -41,6 +46,12 @@ class MembersController < ApplicationController
   
   def list
     @members=Member.all
+    render :layout => false
+  end
+  
+  def ajnewchild
+    @member = Member.find(params['id'])
+    @child = Child.new
     render :layout => false
   end
   

@@ -15,20 +15,19 @@ No children found
 </div>
 <div id="newmemberchilddiv"><a id="newmemberchildbutton" href="<%= new_child_path %>">New Child</a></div>
 <div id="memberchildform" class="form"></div>
-<%= link_to "Back to list", members_path %>
+<%# link_to "Back to list", members_path %>
 <script>
 $(document).ready(function() {
-  $("#newmemberchilddiv").click(
-    function () {
+  $("#newmemberchildbutton").click(
+    function (event) {
+      event.preventDefault();
       if ($("#memberchildform").text() == "") {
-        $("#memberchildform").load("/members/child/ajnew");
+        $("#memberchildform").load("<%= member_path+"/ajnewchild" %>");
       } else {
         $("#memberchildform").empty();
       }
     }
   )
-  $("#newmemberchilddiv a").click(function(event) {
-    event.preventDefault();
-  }
+  
 });
 </script>

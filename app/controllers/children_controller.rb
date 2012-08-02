@@ -1,7 +1,7 @@
 class ChildrenController < ApplicationController
   def ajnew
     @child = Child.new
-    render :layout => false
+    render :new, :layout => false
   end
   def ajcreate
     @child = Member.new(params[:child])
@@ -16,7 +16,11 @@ class ChildrenController < ApplicationController
    @child = Child.new
   end
   def create
-    @child = Child.new(params[:child])
+    # @child = Child.new(params[:child])
+    
+    @member = Member.find(params[:member_id])
+    @child = @member.children.create(params[:child])
+    
     if @child.save
       flash[:notice] = "Successfully created child"
     end

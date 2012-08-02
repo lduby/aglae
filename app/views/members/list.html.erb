@@ -4,6 +4,6 @@
 No members found
 <% end %>
 <% @members.each do |member| %>
-<li><%= link_to member.lastname+" "+member.firstname, member %></li>
+<li><%= link_to member.lastname.to_s.capitalize() +" "+member.firstname.to_s.capitalize(), member %></li>
 <% end %>
 </ul>

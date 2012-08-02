@@ -2,8 +2,8 @@
 function display_member_details() {
   $("#memberslist a").click(function(event) {
     event.preventDefault();
-    $url=$(this).attr("href");
-    $("#memberdetails").load($url);
+    url=$(this).attr("href");
+    $("#memberdetails").load(url+"/jsshow");
   })
 }
 
@@ -44,7 +44,5 @@ No members found
 <div id="memberform" class="form"></div>
 
 <div id="memberdetails" class="details"></div>
-
-<br/>
 
 

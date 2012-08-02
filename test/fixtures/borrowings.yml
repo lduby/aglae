@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  outDate: 2012-07-28
+  backDate: 2012-07-28
+  member_id: 1
+  game_copy_id: 1
+  child_id: 1
+
+two:
+  outDate: 2012-07-28
+  backDate: 2012-07-28
+  member_id: 1
+  game_copy_id: 1
+  child_id: 1

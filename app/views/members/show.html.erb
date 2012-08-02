@@ -1,0 +1,6 @@
+<h1><%= @member.lastname+" "+@member.firstname %></h1>
+<p><%= @member.address+" "+@member.zipcode+" "+@member.city %></p>
+<p><%= "Telephone: "+@member.phone %></p>
+<p><%= "Type: "+@member.member_type %></p>
+
+<%= link_to "Back to list", members_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  memberid: 1
+  lastname: MyString
+  firstname: MyString
+  birthdate: 2012-07-28
+  sex: MyString
+
+two:
+  memberid: 1
+  lastname: MyString
+  firstname: MyString
+  birthdate: 2012-07-28
+  sex: MyString

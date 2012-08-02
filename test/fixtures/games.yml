@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  manufacturer: MyString
+  supplier: MyString
+  min_age: MyString
+  min_nb_player: 1
+  max_nb_player: 1
+  average_length: MyString
+  category: MyString
+  rule: MyString
+  picture: MyString
+
+two:
+  name: MyString
+  description: MyString
+  manufacturer: MyString
+  supplier: MyString
+  min_age: MyString
+  min_nb_player: 1
+  max_nb_player: 1
+  average_length: MyString
+  category: MyString
+  rule: MyString
+  picture: MyString

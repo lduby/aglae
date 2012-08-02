@@ -1,0 +1,9 @@
+<h1>Members</h1>
+<ul>
+<% if @members.size == 0 %>
+No members found
+<% end %>
+<% @members.each do |member| %>
+<li><%= link_to member.lastname+" "+member.firstname, member %></li>
+<% end %>
+</ul>

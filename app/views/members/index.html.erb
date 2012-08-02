@@ -1,0 +1,30 @@
+<script>
+$(document).ready(function() {
+ $("#newmemberdiv").click(
+  function () {  
+    $("#memberform").load("/members/test");
+   }
+  )
+ });
+</script>
+
+<div id="memberslist">
+<h1>Members</h1>
+<ul>
+<% if @members.size == 0 %>
+No members found
+<% end %>
+<% @members.each do |member| %>
+<li><%= link_to member.lastname+" "+member.firstname, member %></li>
+<% end %>
+</ul>
+</div>
+<%= link_to 'New Member', new_member_path %>
+<div id="newmemberdiv"><a id="newmemberbutton" href="#">New Member</a></div>
+
+<div id="memberform" >
+</div>
+
+<br/>
+
+

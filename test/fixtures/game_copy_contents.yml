@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  game_copy_id: 1
+  game_piece_id: 1
+  condition: MyString
+  comment: MyString
+  is_missing: false
+
+two:
+  game_copy_id: 1
+  game_piece_id: 1
+  condition: MyString
+  comment: MyString
+  is_missing: false

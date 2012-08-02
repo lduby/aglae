@@ -1,4 +1,13 @@
 Aglae::Application.routes.draw do
+  root :to => 'members#index'
+  get 'members/test'
+  get 'members/list'
+  post 'members/ajcreate'
+  
+  resources :members
+  resources :games
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

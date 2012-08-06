@@ -33,8 +33,10 @@ $(document).ready(function() {
  });
 </script>
 
-<div id="memberslist">
 <h1>Members</h1>
+<div id="memberslist">
+<div class="row">
+<div class="span4">
 <ul>
 <% if @members.size == 0 %>
 No members found
@@ -44,10 +46,16 @@ No members found
 <% end %>
 </ul>
 </div>
-<div id="newmemberdiv"><a id="newmemberbutton" href="<%= new_member_path %>">New Member</a></div>
+<div class="span4">
+
+<div id="memberdetails" class="details">
+Click a member to view it.
+</div>
+</div>
+<div class="span4">
+<div id="newmemberdiv"><a id="newmemberbutton" class="btn" href="<%= new_member_path %>">New Member</a></div>
 
 <div id="memberform" class="form"></div>
+</div>
 
-<div id="memberdetails" class="details"></div>
-
-
+</div>

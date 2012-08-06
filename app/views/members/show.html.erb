@@ -9,7 +9,21 @@
 No children found
 <% end %>
 <% @member.children.each do |memberchild| %>
-<li><%= link_to memberchild.lastname+" "+memberchild.firstname, memberchild %></li>
+	  <div id="accordion2" class="accordion">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a href="#collapse<%=memberchild.id%>" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+		  <%=memberchild.lastname.capitalize+" "+memberchild.firstname.capitalize%>
+                </a>
+              </div>
+              <div class="accordion-body collapse" id="collapse<%=memberchild.id%>" style="height: 0px;">
+                <div class="accordion-inner">
+                  <p>Birthdate : <%=memberchild.birthdate%></p>
+                </div>
+              </div>
+            </div>
+          </div>
+<!--<li><%= link_to memberchild.lastname+" "+memberchild.firstname, memberchild %></li>-->
 <% end %>
 </ul>
 </div>

@@ -39,7 +39,7 @@ class MembersController < ApplicationController
   def update
   end
   
-  def test
+  def ajnewmember
     @member = Member.new
     render :layout => false
   end

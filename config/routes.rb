@@ -5,6 +5,14 @@ Aglae::Application.routes.draw do
   post 'members/ajcreate'
   get 'children/ajnew'
   match 'members/:id/ajnewchild' => 'members#ajnewchild'
+
+  get 'games/ajnewgame'
+  get 'games/list'
+  get 'games/:id/jsshow' => 'games#jsshow'
+  post 'games/ajcreate'
+  get 'gamecopies/ajnew'
+  match 'games/:id/ajnewgamecopy' => 'games#ajnewgamecopy'
+
   
   resources :members do
     resources :children
@@ -12,9 +20,11 @@ Aglae::Application.routes.draw do
       get "jsshow"
     end
   end
-  resources :games
-  resources :children
-
+  resources :games do
+    resources :game_copies
+  end
+  resources :game_copies
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

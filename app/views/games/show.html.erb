@@ -1,2 +1,59 @@
-<h1>Games#show</h1>
-<p>Find me in app/views/games/show.html.erb</p>
+<h1><%= @game.name.capitalize %></h1>
+<p><%= @game.manufacturer %></p>
+<p><%= @game.supplier %></p>
+<p><%= @game.picture %></p>
+<p><%= @game.rule %></p>
+<p><%= @game.category %></p>
+<p><%= @game.average_length %></p>
+<p><%= @game.max_nb_player %></p>
+<p><%= @game.min_nb_player %></p>
+
+
+<div id="gamecopieslist">
+<h2>Copies</h2>
+<ul>
+<% if @game.game_copies.size == 0 %>
+No copy found
+<% end %>
+<% @game.game_copies.each do |gamecopy| %>
+	  <div id="accordion2" class="accordion">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a href="#collapse<%=gamecopy.id%>" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+		  <%=gamecopy.game.name%> 
+                </a>
+              </div>
+              <div class="accordion-body collapse" id="collapse<%=gamecopy.id%>" style="height: 0px;">
+                <div class="accordion-inner">
+                  <p>Status : <%=gamecopy.status%></p>
+                  <p>Location : <%=gamecopy.location%></p>
+                  <p>Purchase date : <%=gamecopy.purchase_date%></p>
+                  <p>Rent price : <%=gamecopy.RentPrice%></p>
+                  <p>Comment : <%=gamecopy.comment%></p>
+                  <p>Condition : <%=gamecopy.condition%></p>
+                </div>
+              </div>
+            </div>
+          </div>
+<!--<li><%= link_to gamecopy.game.name %></li>-->
+<% end %>
+</ul>
+</div>
+<div id="newgamecopydiv"><a id="newgamecopybutton" href="<%= new_game_copy_path %>">New Copy</a></div>
+<div id="gamecopyform" class="form"></div>
+<%# link_to "Back to list", games_path %>
+<script>
+$(document).ready(function() {
+  $("#newgamecopybutton").click(
+    function (event) {
+      event.preventDefault();
+      if ($("#gamecopyform").text() == "") {
+        $("#gamecopyform").load("<%= game_path+"/ajnewgamecopy" %>");
+      } else {
+        $("#gamecopyform").empty();
+      }
+    }
+  )
+  
+});
+</script>

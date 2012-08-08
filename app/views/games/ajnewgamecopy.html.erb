@@ -1,0 +1,38 @@
+<h1>New game copy</h1>
+<script>
+function display_game_copy_details() {
+  $("#gamecopieslist a").click(
+    $url=this.attr("href");
+    $("#gamecopydetails").load($url+"/ajshow");
+  )
+}
+$(document).ready(function() {
+ $("#gameCopyFormSubmit").click(
+  function () {  
+    $.ajax({type:'POST', url: '/games/ajcreategamecopy', data:$('#new_game_copy').serialize(), success: function(response) {
+      $('#notice').html(response);
+      $('#gamecopyform').empty();
+      $('#gamecopieslist').load("/gamecopies/list", display_game_copy_details);
+      
+    }});
+    
+    return false;
+   }
+  )
+ });
+</script>
+
+<%= form_for [@game, @game.game_copies.build] do |f| %>
+<table>
+<tr><td><%= f.label :RentPrice, "RentPrice" %></td><td><%= f.text_field :RentPrice %></td></tr>
+<tr><td><%= f.label :comment, "comment" %></td><td><%= f.text_field :comment %></td></tr>
+<tr><td><%= f.label :PurchasePrice, "PurchasePrice" %></td><td><%= f.text_field :PurchasePrice %></td></tr>
+<tr><td><%= f.label :condition, "condition" %></td><td><%= f.text_field :condition %></td></tr>
+<tr><td><%= f.label :location, "location" %></td><td><%= f.text_field :location %></td></tr>
+<tr><td><%= f.label :status, "status" %></td><td><%= f.text_field :status %></td></tr>
+<tr><td><%= f.label :purchase_date, "purchase_date" %></td><td><%= f.date_select :purchase_date %></td></tr>
+
+
+</table>
+<%= f.submit "Create", :id => "gameCopyFormSubmit" %>
+<% end %>

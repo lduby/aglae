@@ -1,0 +1,45 @@
+
+
+<h1>New Member</h1>
+<script>
+function display_member_details() {
+  $("#memberlist a").click(
+    function() {
+      url=this.attr("href");
+      $("#memberdetails").load(url+"/ajshow");
+    }
+  )
+}
+$(document).ready(function() {
+ $("#MemberFormSubmit").click(
+  function () {  
+    $.ajax({type:'POST', url: '/members/ajcreate', data:$('#new_member').serialize(), success: function(response) {
+      $('#notice').html(response);
+      $('#memberform').empty();
+      $('#memberslist').load("/members/list", display_member_details);
+      
+    }});
+    
+    return false;
+   }
+  )
+ });
+</script>
+
+<%= form_for @member do |f| %>
+<table>
+<tr><td><%= f.label :lastname, "Lastname" %></td><td><%= f.text_field :lastname %></td></tr>
+<tr><td><%= f.label :firstname, "firstname" %></td><td><%= f.text_field :firstname %></td></tr>
+<tr><td><%= f.label :organization, "organization" %></td><td><%= f.text_field :organization %></td></tr>
+<tr><td><%= f.label :occupation, "occupation" %></td><td><%= f.text_field :occupation %></td></tr>
+<tr><td><%= f.label :birthdate, "birthdate" %></td><td><%= f.date_select :birthdate %></td></tr>
+<tr><td><%= f.label :address, "address" %></td><td><%= f.text_field :address %></td></tr>
+<tr><td><%= f.label :zipcode, "zipcode" %></td><td><%= f.text_field :zipcode %></td></tr>
+<tr><td><%= f.label :city, "city" %></td><td><%= f.text_field :city %></td></tr>
+<tr><td><%= f.label :phone, "phone" %></td><td><%= f.text_field :phone %></td></tr>
+<tr><td><%= f.label :member_type, "type" %></td><td><%= f.text_field :member_type %></td></tr>
+</table>
+<%= f.submit "Create", :id => "MemberFormSubmit" %>
+<% end %>
+
+

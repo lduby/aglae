@@ -1,0 +1,45 @@
+<h1>New game</h1>
+<script>
+function display_game_details() {
+  $("#gamelist a").click(
+    function() {
+      url=this.attr("href");
+      $("#gamedetails").load(url+"/ajshow");
+    }
+  )
+}
+$(document).ready(function() {
+ $("#gameFormSubmit").click(
+  function () {  
+    $.ajax({type:'POST', url: '/games/ajcreate', data:$('#new_game').serialize(), success: function(response) {
+      $('#notice').html(response);
+      $('#gameform').empty();
+      $('#gameslist').load("/games/list", display_game_details);
+      
+    }});
+    
+    return false;
+   }
+  )
+ });
+</script>
+
+<%= form_for @game do |f| %>
+<table>
+<tr><td><%= f.label :name, "name" %></td><td><%= f.text_field :name %></td></tr>
+<tr><td><%= f.label :manufacturer, "manufacturer" %></td><td><%= f.text_field :manufacturer %></td></tr>
+<tr><td><%= f.label :supplier, "supplier" %></td><td><%= f.text_field :supplier %></td></tr>
+<tr><td><%= f.label :category, "category" %></td><td><%= f.text_field :category %></td></tr>
+<tr><td><%= f.label :average_length, "average_length" %></td><td><%= f.text_field :average_length %></td></tr>
+<tr><td><%= f.label :description, "description" %></td><td><%= f.text_field :description %></td></tr>
+<tr><td><%= f.label :max_nb_player, "max_nb_player" %></td><td><%= f.text_field :max_nb_player %></td></tr>
+<tr><td><%= f.label :min_nb_player, "min_nb_player" %></td><td><%= f.text_field :min_nb_player %></td></tr>
+<tr><td><%= f.label :min_age, "min_age" %></td><td><%= f.text_field :min_age %></td></tr>
+<tr><td><%= f.label :picture, "picture" %></td><td><%= f.text_field :picture %></td></tr>
+<tr><td><%= f.label :rule, "rule" %></td><td><%= f.text_field :rule %></td></tr>
+
+</table>
+<%= f.submit "Create", :id => "gameFormSubmit" %>
+<% end %>
+
+

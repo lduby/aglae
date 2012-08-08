@@ -1,0 +1,9 @@
+<h1>Games</h1>
+<ul>
+<% if @games.size == 0 %>
+No games found
+<% end %>
+<% @games.each do |game| %>
+<li><%= link_to game.name.to_s.capitalize(), game %></li>
+<% end %>
+</ul>

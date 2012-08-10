@@ -2,14 +2,6 @@
 
 <h1>New Member</h1>
 <script>
-function display_member_details() {
-  $("#memberlist a").click(
-    function() {
-      url=this.attr("href");
-      $("#memberdetails").load(url+"/ajshow");
-    }
-  )
-}
 $(document).ready(function() {
  $("#MemberFormSubmit").click(
   function () {  

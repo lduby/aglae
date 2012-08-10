@@ -1,15 +1,18 @@
+<div class="alert alert-info">
+<button type="button" class="close" >x</button>
 <h1><%= @member.lastname.capitalize+" "+@member.firstname.capitalize %></h1>
 <p><%= @member.address+" "+@member.zipcode+" "+@member.city %></p>
 <p><%= "Telephone: "+@member.phone %></p>
 <p><%= "Type: "+@member.member_type %></p>
 <div id="childrenlist">
 <h2>Children</h2>
-<ul>
+
 <% if @member.children.size == 0 %>
 No children found
 <% end %>
-<% @member.children.each do |memberchild| %>
 	  <div id="accordion2" class="accordion">
+<% @member.children.each do |memberchild| %>
+
             <div class="accordion-group">
               <div class="accordion-heading">
                 <a href="#collapse<%=memberchild.id%>" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
@@ -22,14 +25,16 @@ No children found
                 </div>
               </div>
             </div>
-          </div>
+          
 <!--<li><%= link_to memberchild.lastname+" "+memberchild.firstname, memberchild %></li>-->
 <% end %>
-</ul>
+</div>
 </div>
 <div id="newmemberchilddiv"><a id="newmemberchildbutton" href="<%= new_child_path %>">New Child</a></div>
 <div id="memberchildform" class="form"></div>
 <%# link_to "Back to list", members_path %>
+</div>
+
 <script>
 $(document).ready(function() {
   $("#newmemberchildbutton").click(
@@ -42,6 +47,6 @@ $(document).ready(function() {
       }
     }
   )
-  
+  member_button_close();
 });
 </script>

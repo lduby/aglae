@@ -44,6 +44,18 @@ class MembersController < ApplicationController
     render :layout => false
   end
   
+  def search
+    @searchlist=Array.new
+    Member.all.each do |member|
+      @searchlist << member.lastname + " " + member.firstname
+    end
+    Game.all.each do |game|
+      @searchlist << game.name
+    end
+    logger.debug @searchlist
+    render :json => @searchlist
+  end
+  
   def list
     @members=Member.all
     render :layout => false

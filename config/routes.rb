@@ -1,7 +1,8 @@
 Aglae::Application.routes.draw do
   root :to => 'members#index'
-  get 'members/test'
-  get 'members/list'
+  get 'members/ajnewmember'
+  get 'members/list'  
+  get 'members/search'
   post 'members/ajcreate'
   get 'children/ajnew'
   match 'members/:id/ajnewchild' => 'members#ajnewchild'
@@ -24,7 +25,7 @@ Aglae::Application.routes.draw do
     resources :game_copies
   end
   resources :game_copies
-  
+  resources :children
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -3,14 +3,12 @@
     <div class="span3">
       <div id="openings" class="well">
         <h4>Horaires</h4>
-          <br>
-          <p>Lundi: <%= Aglae::Application.config.toy_library_openings_mon_am %> - <%= Aglae::Application.config.toy_library_openings_mon_pm %></p>
-          <p>Mardi: <%= Aglae::Application.config.toy_library_openings_tue_am %> - <%= Aglae::Application.config.toy_library_openings_tue_pm %></p>
-          <p>Mercredi: <%= Aglae::Application.config.toy_library_openings_wed_am %> - <%= Aglae::Application.config.toy_library_openings_wed_pm %></p>
-          <p>Jeudi: <%= Aglae::Application.config.toy_library_openings_thu_am %> - <%= Aglae::Application.config.toy_library_openings_thu_pm %></p>
-          <p>Vendredi: <%= Aglae::Application.config.toy_library_openings_fri_am %> - <%= Aglae::Application.config.toy_library_openings_fri_pm %></p>
-          <p>Samedi: <%= Aglae::Application.config.toy_library_openings_sat_am %> - <%= Aglae::Application.config.toy_library_openings_sat_pm %></p>
-
+        <br>
+        <% if !@openings.nil? %>
+          <% @openings.each do |opening| %>
+            <p><%= opening %></p>
+          <% end %>
+        <% end %> 
       </div>
       <div id="news" class="well">
         <h4>Actualités</h4>

@@ -14,6 +14,7 @@ Aglae::Application.routes.draw do
   get 'gamecopies/ajnew'
   match 'games/:id/ajnewgamecopy' => 'games#ajnewgamecopy'
 
+  get 'home/index'
   
   resources :members do
     resources :children

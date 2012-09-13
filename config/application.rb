@@ -55,5 +55,13 @@ module Aglae
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Convenience method to access application's configuration object
+    # def self.config
+    #  Application.config
+    # end
+
+    # Loading settings
+    YAML.load_file("#{Rails.root}/config/settings.yml").each { |k,v| Application.config.send "#{k}=", v }
   end
 end

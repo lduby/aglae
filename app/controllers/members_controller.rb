@@ -7,6 +7,10 @@ class MembersController < ApplicationController
     @member = Member.find(params['id'])
   end
   
+  def show_profile
+    @member = Member.find(params['id'])
+  end
+  
   def create
     @member = Member.new(params[:member])
     if @member.save 
@@ -30,6 +34,7 @@ class MembersController < ApplicationController
   end
   
   def edit
+    @member = Member.find(params['id'])
   end
 
   def new

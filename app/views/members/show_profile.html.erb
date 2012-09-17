@@ -1,0 +1,56 @@
+<br>
+<div class="row-fluid">
+  <div class="span8">
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="thumbnail">
+          <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcSi80PQtcEt9ZoMQIxgDgN8SaXaH4wwJt5GvASTHW1-Pt5z4uPt"/>
+        </div>
+        <br>
+        <a class="btn" href="<%= edit_member_path(current_user.member_profile)%>">
+          <i class="icon-pencil">Edit Profile</i>
+        </a>
+      </div>
+      <div class="span8">
+        <div class="well">
+          <h2><%= current_user.member_profile.firstname.to_s.capitalize %> <%= current_user.member_profile.lastname.to_s.capitalize %></h2>
+          <h5><%= current_user.member_profile.address %></h5>
+          <h5><%= current_user.member_profile.zipcode.to_s+" - "+current_user.member_profile.city.to_s %></h5>
+          <h5><%= "Join in "+current_user.member_profile.created_at.to_date.to_s %></h5>
+        </div>
+        <div class="page-header">
+          <h4>
+            <%= current_user.member_profile.firstname.to_s.capitalize+" "+current_user.member_profile.lastname.to_s.capitalize+"'s Children" %>
+            <a class="btn pull-right" href="<%= new_member_child_path(current_user.member_profile)%>">
+              <i class=".icon-plus">New Child</i>
+            </a>
+          </h4>
+          <% if current_user.member_profile.children.size != 0 %>
+            <ul>
+              <% current_user.member_profile.children.each do |child| %>
+                <li><%= link_to(child.firstname.to_s.capitalize+" "+child.lastname.to_s.capitalize,member_child_path(current_user.member_profile,child)) %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <div class="page-header">
+          <h4>Registered activities (#)</h4>
+        </div>
+        <div class="page-header">
+          <h4>Rented Games (#)</h4>
+        </div>
+        <div class="page-header">
+          <h4>Game Reservations (#)</h4>
+        </div>
+        <div class="page-header">
+          <h4>Game cards (#)</h4>
+        </div>  
+      </div>
+    </div>                  
+  </div>
+  <div class="span4">
+    <div class="page-header">
+      <h3>Rappels</h3>
+    </div>
+  </div>
+</div>

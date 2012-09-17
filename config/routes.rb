@@ -26,6 +26,7 @@ Aglae::Application.routes.draw do
     resources :children
     member do
       get "jsshow"
+      get "show_profile"
     end
   end
   resources :games do

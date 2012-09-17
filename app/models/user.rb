@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
+  has_one :profile
+  has_one :member_profile, :class_name => "Member", :through => :profile, :source => :member
+  
   def password_required?
     super if confirmed?
   end

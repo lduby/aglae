@@ -21,6 +21,7 @@ Aglae::Application.routes.draw do
   match 'games/:id/ajnewgamecopy' => 'games#ajnewgamecopy'
 
   get 'home/index'
+  get 'calendar/index'
   
   resources :members do
     resources :children
@@ -34,6 +35,8 @@ Aglae::Application.routes.draw do
   end
   resources :game_copies
   resources :children
+  
+  resources :events
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

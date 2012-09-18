@@ -1,0 +1,9 @@
+<%= form_for @event do |f| %>
+<table>
+<tr><td><%= f.label :title, "Title" %></td><td><%= f.text_field :title %></td></tr>
+<tr><td><%= f.label :start, "Starts at" %></td><td><%= f.datetime_select :start %></td></tr>
+<tr><td><%= f.label :end, "Ends at" %></td><td><%= f.datetime_select :end %></td></tr>
+<tr><td><%= f.label :description, "Description" %></td><td><%= f.text_field :description %></td></tr
+</table>
+<%= f.submit %>
+<% end %>

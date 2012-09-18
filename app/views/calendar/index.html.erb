@@ -1,0 +1,28 @@
+<script>
+$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+      // put your options and callbacks here
+      height: 500,
+      events: '/events',
+      dayClick: function() {
+        alert('a day has been clicked!');
+      }
+    })
+
+});
+</script>
+<br>
+<div class="row-fluid">
+  <div class="span8">
+    <div id="calendar"></div>
+  </div>
+  <div class="span4">
+    <div id="event">
+      <%= render '/events/form' %>
+    </div>
+  </div>
+</div>
+

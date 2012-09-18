@@ -1,9 +1,29 @@
 <%= form_for @event do |f| %>
-<table>
-<tr><td><%= f.label :title, "Title" %></td><td><%= f.text_field :title %></td></tr>
-<tr><td><%= f.label :start, "Starts at" %></td><td><%= f.datetime_select :start %></td></tr>
-<tr><td><%= f.label :end, "Ends at" %></td><td><%= f.datetime_select :end %></td></tr>
-<tr><td><%= f.label :description, "Description" %></td><td><%= f.text_field :description %></td></tr
-</table>
-<%= f.submit %>
+  <table>
+    <tr>
+      <td><%= f.label :title, "Title" %></td>
+      <td><%= f.text_field :title %></td>
+    </tr>
+    <tr>
+      <td><label>Start date</label></td>
+      <td><input type="text" id="start_datepicker" name="start_date"></td>
+    </tr>
+    <tr>
+      <td><label>Start time</label></td>
+      <td><input type="text" id="start_timepicker" name="start_time" placeholder="HH:MM"></td>
+    </tr>
+    <tr>
+      <td><label>End date</label></td>
+      <td><input type="text" id="end_datepicker" name="end_date"></td>
+    </tr>
+    <tr>
+      <td><label>End time</label></td>
+      <td><input type="text" id="end_timepicker" name="end_time" placeholder="HH:MM"></td>
+    </tr>
+    <tr>
+      <td><%= f.label :description, "Description" %></td>
+      <td><%= f.text_field :description %></td>
+    </tr>
+  </table>
+  <%= f.submit %>
 <% end %>

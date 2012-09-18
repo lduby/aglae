@@ -31,23 +31,21 @@ class EventsController < ApplicationController
   def create
   
     logger.debug(params)
-    @start_datetime = params[:event]["start(1i)"].to_s+"-"+params[:event]["start(2i)"].to_s+"-"+params[:event]["start(3i)"].to_s+" "+params[:event]["start(4i)"].to_s+":"+params[:event]["start(5i)"].to_s+":00"
+    
+    @start_datetime = params["start_date"].to_s+" "+params["start_time"].to_s+":00"
     logger.debug(@start_datetime)
-    @end_datetime = params[:event]["end(1i)"].to_s+"-"+params[:event]["end(2i)"].to_s+"-"+params[:event]["end(3i)"].to_s+" "+params[:event]["end(4i)"].to_s+":"+params[:event]["end(5i)"].to_s+":00"
-    
+    @end_datetime = params["end_date"].to_s+" "+params["end_time"].to_s+":00"
     logger.debug(@end_datetime)
-    
-    params[:event][:start] = @start_datetime
-    params[:event][:end] = @end_datetime
-    
-    logger.debug(params)
-    #@event = Member.new({:title => params[:event][:title], :description => params[:event][:description], :start => @start_datetime, :end => @end_datetime, :allDay => false}, :without_protection => true)
+
     @event = Event.new
     @event.title = params[:event][:title]
     @event.description = params[:event][:description]
-    @event.start = @start_datetime
-    @event.end = @end_datetime
-    @event.allDay = false
+    if params["start_time"].nil? || params["end_time"].nil?
+      @event.allDay = true
+    else 
+      @event.start = @start_datetime
+      @event.end = @end_datetime
+    end
     if @event.save 
       flash[:notice] = "Successfully created event"
     end

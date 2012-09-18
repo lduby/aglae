@@ -1,8 +1,7 @@
 <script>
-$(document).ready(function() {
 
+  $(document).ready(function() {
     // page is now ready, initialize the calendar...
-
     $('#calendar').fullCalendar({
       // put your options and callbacks here
       height: 500,
@@ -11,9 +10,29 @@ $(document).ready(function() {
         alert('a day has been clicked!');
       }
     })
-
-});
+  });
+  
+  // initializing datepicker fields
+    
+  $(function() {
+		$( "#start_datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: "yy-mm-dd"
+		});
+	});
+	
+	$(function() {
+		$( "#end_datepicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: "yy-mm-dd"
+		});
+	});
+	
 </script>
+
+
 <br>
 <div class="row-fluid">
   <div class="span8">

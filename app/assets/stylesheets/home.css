@@ -3,10 +3,10 @@
   margin: 0; 
   padding: 0;
 }
-body {
+/*body {
   background: #ccc; 
   font-family: arial, verdana, tahoma;
-}
+}*/
 
 /*Time to apply widths for accordian to work
 Width of image = 640px
@@ -18,6 +18,8 @@ default width = 840/3 = 280px;
 */
 
 .accordian {
+  background: #ccc; 
+  font-family: arial, verdana, tahoma;
   /*width: 845px; */
   height: 320px;
   overflow: hidden;

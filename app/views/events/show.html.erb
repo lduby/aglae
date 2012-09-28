@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h4><%= @event.title %><a class="btn btn-mini pull-right">New</a></h4>
+  <small><%= @event.start.to_formatted_s(:short) + " - " + distance_of_time_in_words(@event.start, @event.end) %>
+</div>
+<p><%= @event.description %></p>
+<br/>
+<div id="event_actions" class="pull-right">
+  <a class="btn btn-small btn-warning">Etre Bénévole</a>
+  <a class="btn btn-small btn-success">Participer</a>
+</div>
+

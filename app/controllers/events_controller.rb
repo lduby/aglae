@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+
+  respond_to :html, :xml, :json
   def index 
     # full_calendar will hit the index method with query parameters
     # 'start' and 'end' in order to filter the results for the
@@ -17,11 +19,12 @@ class EventsController < ApplicationController
     logger.debug('Events:')
     logger.debug(@events)
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml { render :xml => @events }
-      format.js { render :json => @events }
-    end
+    respond_with(@events)
+  end
+  
+  def show
+    @event = Event.find(params[:id])
+    render :layout => false
   end
   
   def new

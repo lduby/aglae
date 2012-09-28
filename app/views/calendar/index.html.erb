@@ -8,6 +8,11 @@
       events: '/events',
       dayClick: function() {
         alert('a day has been clicked!');
+      },
+      eventClick: function(calEvent) {
+        //alert('Event: ' + calEvent.title  + ' - URL: ' + calEvent.url);
+        $("#event").load(calEvent.url);
+        return false;
       }
     })
   });
@@ -15,21 +20,21 @@
   // initializing datepicker fields
     
   $(function() {
-		$( "#start_datepicker" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: "yy-mm-dd"
-		});
-	});
-	
-	$(function() {
-		$( "#end_datepicker" ).datepicker({
-			changeMonth: true,
-			changeYear: true,
-			dateFormat: "yy-mm-dd"
-		});
-	});
-	
+    $( "#start_datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: "yy-mm-dd"
+    });
+  });
+  
+  $(function() {
+    $( "#end_datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      dateFormat: "yy-mm-dd"
+    });
+  });
+  
 </script>
 
 

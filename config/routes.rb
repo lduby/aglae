@@ -5,7 +5,8 @@ Aglae::Application.routes.draw do
     put "/confirm" => "confirmations#confirm"
   end
 
-  root :to => 'members#index'
+  #root :to => 'members#index'
+  root :to => 'passthrough#index'
   get 'members/ajnewmember'
   get 'members/list'  
   get 'members/search'
@@ -21,6 +22,7 @@ Aglae::Application.routes.draw do
   match 'games/:id/ajnewgamecopy' => 'games#ajnewgamecopy'
 
   get 'home/index'
+  get 'home/dashboard'
   get 'calendar/index'
   
   resources :members do

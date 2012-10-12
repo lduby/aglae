@@ -12,6 +12,7 @@ class PassthroughController < ApplicationController
         path = home_index_path
       else 
         # If you want to raise an exception or have a default root for users without roles
+        path = home_index_path
       end
     end
     redirect_to path     

@@ -22,8 +22,17 @@ class MembersController < ApplicationController
     @member = Member.new(params[:member])
     if @member.save 
       @msg = "saved successfully"
+      if params["email"] != ""
+        @user = User.new(:email => params["email"])
+        if @user.save
+          @user.member_profile = @member
+          @msg << " and corresponding user successfullty created"
+        else
+          @msg << " but corresponding user not created"
+        end
+      end
     else 
-      @msg = "error on saving"  
+      @msg = "error on saving member"  
     end
     render :layout => false
   end 

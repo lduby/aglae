@@ -1,6 +1,8 @@
 class MembersController < ApplicationController
+  load_and_authorize_resource
   def index
-    @members = Member.all
+    @members = @members.accessible_by(current_ability)
+    logger.debug(@members)
   end
   
   def show
@@ -71,7 +73,8 @@ class MembersController < ApplicationController
   end
   
   def list
-    @members=Member.all
+    #@members=Member.all
+    @members = @members.accessible_by(current_ability)
     render :layout => false
   end
   

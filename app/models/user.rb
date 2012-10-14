@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_one :member_profile, :class_name => "Member", :through => :profile, :source => :member
   
   #Setting up the roles
-  ROLES = %w[admin member CA_member employee volunteer]
+  ROLES = %w[admin member board_member employee volunteer]
   
   def password_required?
     super if confirmed?

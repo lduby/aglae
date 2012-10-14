@@ -7,7 +7,9 @@
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="/home/index">Home</a></li>
-            <% if can? :read, Member %>
+            <% if current_user.is?("board_member") %>
+              <li><a href="/members/">Members</a></li>
+            <% elsif current_user.is?("employee") %>
               <li><a href="/members/">Members</a></li>
             <% end %>
             <li><a href="/games">Catalog</a></li>

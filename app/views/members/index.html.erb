@@ -1,7 +1,7 @@
 <script>
 
 $(document).ready(function() {
- load_members_list();
+ //load_members_list();
  $("#newmemberdiv a").click(
   function (event) {
     event.preventDefault();
@@ -14,28 +14,68 @@ $(document).ready(function() {
       $("#memberform").slideToggle('slow', function () {$("#memberform").empty();});
     }
    }
-  )
-  
+  );
+  var grid;
+  var columns = [
+    {id: "id", name: "ID", field: "id"},
+    {id: "firstname", name: "First Name", field: "firstname"},
+    {id: "lastname", name: "Last Name", field: "lastname"},
+    {id: "address", name: "Address", field: "address"},
+    {id: "city", name: "City", field: "city"},
+    {id: "type", name: "Member Type", field: "member_type"}
+  ];
+  var options = {
+    enableCellNavigation: true,
+    enableColumnReorder: false
+  };
+  $.getJSON('/members', function(data) {
+      grid = new Slick.Grid("#membersGrid", data, columns, options);
+      $("#membersGrid").show();
+    });
  });
 </script>
 
 <h1>Members</h1>
 
 <div class="row-fluid">
-<div class="span4 well">
+<div class="span8 well">
 <div id="memberslist">
-
+  <div id="membersGrid" style="width:600px;height:500px;"></div>
 </div>
 </div>
-<div class="span4 well">
+<!-- <div class="span4 well">
 
 <div id="memberdetails" class="details">
 Click a member to view it.
 </div>
-</div>
+</div>-->
 <div class="span4 well">
 <div id="newmemberdiv"><a id="newmemberbutton" class="btn" href="<%= new_member_path %>">New Member</a></div>
 
 <div id="memberform" class="form"></div>
 </div>
 </div>
+
+
+<script>
+  
+
+  /*$(function () {
+    var data = [];
+    for (var i = 0; i < 500; i++) {
+      data[i] = {
+        title: "Task " + i,
+        duration: "5 days",
+        percentComplete: Math.round(Math.random() * 100),
+        start: "01/01/2009",
+        finish: "01/05/2009",
+        effortDriven: (i % 5 == 0)
+      };
+    }*/
+    
+    
+
+    /*grid = new Slick.Grid("#membersGrid", data, columns, options);
+    $("#membersGrid").show(); */
+  })
+</script>

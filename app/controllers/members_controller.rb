@@ -2,7 +2,16 @@ class MembersController < ApplicationController
   load_and_authorize_resource
   def index
     @members = @members.accessible_by(current_ability)
-    logger.debug(@members)
+    logger.debug(@members.size)
+    respond_to do |format|
+      format.html
+      format.json { 
+        logger.debug("JSON members")
+        logger.debug(@members.size)
+        render :json => @members }
+    end
+
+    
   end
   
   def show

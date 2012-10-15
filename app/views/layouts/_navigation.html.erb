@@ -7,10 +7,12 @@
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><a href="/home/index">Home</a></li>
-            <% if current_user.is?("board_member") %>
-              <li><a href="/members/">Members</a></li>
-            <% elsif current_user.is?("employee") %>
-              <li><a href="/members/">Members</a></li>
+            <% if user_signed_in? %>
+              <% if current_user.is?("board_member") %>
+                <li><a href="/members/">Members</a></li>
+              <% elsif current_user.is?("employee") %>
+                <li><a href="/members/">Members</a></li>
+              <% end %>
             <% end %>
             <li><a href="/games">Catalog</a></li>
             <li><a href="/calendar/index">Calendar</a></li>

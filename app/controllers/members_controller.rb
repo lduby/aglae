@@ -1,15 +1,18 @@
 class MembersController < ApplicationController
   load_and_authorize_resource
+  
+  respond_to :html, :xml, :json
   def index
     @members = @members.accessible_by(current_ability)
     logger.debug(@members.size)
-    respond_to do |format|
-      format.html
-      format.json { 
-        logger.debug("JSON members")
-        logger.debug(@members.size)
-        render :json => @members }
-    end
+    respond_with(@members)
+#    respond_to do |format|
+#      format.html
+#      format.json { 
+#        logger.debug("JSON members")
+#        logger.debug(@members.size)
+#        render :json => @members }
+#    end
 
     
   end

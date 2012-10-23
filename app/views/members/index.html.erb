@@ -18,11 +18,12 @@ $(document).ready(function() {
   var grid;
   var columns = [
     {id: "id", name: "ID", field: "id"},
-    {id: "firstname", name: "First Name", field: "firstname"},
-    {id: "lastname", name: "Last Name", field: "lastname"},
-    {id: "address", name: "Address", field: "address"},
-    {id: "city", name: "City", field: "city"},
-    {id: "type", name: "Member Type", field: "member_type"}
+    {id: "type", name: "Type", cssClass: "cell-member-type", field: "member_type", formatter: Slick.Formatters.MemberType},
+    {id: "name", name: "Name", field: "name"},
+    {id: "local", name: "Local", cssClass: "cell-local-member", field: "is_local", formatter: Slick.Formatters.Locality},
+    {id: "children_count", name: "Children", field: "children_count"},
+    {id: "joined_at", name: "Since", field: "created_at"},
+    {id: "board_member", name: "Board Member", cssClass: "cell-board-member", field: "is_a_board_member", formatter: Slick.Formatters.Checkmark}
   ];
   var options = {
     enableCellNavigation: true,
@@ -35,12 +36,27 @@ $(document).ready(function() {
  });
 </script>
 
-<h1>Members</h1>
-
+<br/>
 <div class="row-fluid">
-<div class="span8 well">
+  <div class="span2">
+    <h1>Members</h1>
+  </div>
+  <div class="span10">
+    <div class="btn-group">
+      <button class="btn active">All</button>
+      <button class="btn">Board</button>
+      <button class="btn">Volunteers</button>
+      <button class="btn">Late</button>
+      <button class="btn">Inactive</button>
+    </div>
+  </div>
+</div>
+
+<br/>
+<div class="row-fluid">
+<div class="span8">
 <div id="memberslist">
-  <div id="membersGrid" style="width:600px;height:500px;"></div>
+  <div id="membersGrid" style="width:100%; height:500px;"></div>
 </div>
 </div>
 <!-- <div class="span4 well">

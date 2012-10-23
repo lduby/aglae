@@ -39,6 +39,7 @@ Aglae::Application.routes.draw do
   resources :children
   
   resources :events
+  match 'events/:id/volunteer' => 'events#volunteer'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

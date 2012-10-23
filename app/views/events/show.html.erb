@@ -5,7 +5,7 @@
 <p><%= @event.description %></p>
 <br/>
 <div id="event_actions" class="pull-right">
-  <a class="btn btn-small btn-warning">Etre Bénévole</a>
+  <%= link_to "Volunteer", {:controller => "events", :action => "volunteer", :id => @event}, :class => "btn btn-small btn-warning" %>
   <a class="btn btn-small btn-success">Participer</a>
 </div>
 

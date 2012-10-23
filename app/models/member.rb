@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
   has_many :children
   has_many :borrowings
   has_many :board_entries, :order => 'entered_at DESC'
-  #has_many :voluntary_works
+  has_many :voluntary_works, :order => 'volunteered_at ASC'
   attr_accessible :address, :birthdate, :city, :firstname, :lastname, :occupation, :organization, :phone, :member_type, :zipcode
   
   def name
@@ -15,7 +15,7 @@ class Member < ActiveRecord::Base
     # just in case someone says as_json(nil) and bypasses
     # our default...
     super((options || { }).merge({
-        :methods => [:name, :children_count, :is_local, :is_a_board_member, :last_entered_board_at]
+        :methods => [:name, :children_count, :is_local, :is_a_board_member, :last_entered_board_at, :is_a_volunteer, :last_volunteered_at]
     }))
   end
 
@@ -42,10 +42,16 @@ class Member < ActiveRecord::Base
   end
 
   def is_a_volunteer
-
+    self.voluntary_works.size > 0
+    #if self.voluntary_works.size > 0
+    #  self.voluntary_works.last.volunteered_at > Time.now - 1.year
+    #end
   end
 
   def last_volunteered_at
-
+    if self.voluntary_works.size > 0
+      self.voluntary_works.last.volunteered_at
+    end
   end
+
 end

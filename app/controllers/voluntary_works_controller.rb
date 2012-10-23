@@ -1,0 +1,3 @@
+class VoluntaryWorksController < ApplicationController
+
+end

@@ -23,10 +23,12 @@ $(document).ready(function() {
     {id: "local", name: "Local", cssClass: "cell-local-member", field: "is_local", formatter: Slick.Formatters.Locality},
     {id: "children_count", name: "Children", field: "children_count"},
     {id: "joined_at", name: "Since", field: "created_at"},
-    {id: "board_member", name: "Board Member", cssClass: "cell-board-member", field: "is_a_board_member", formatter: Slick.Formatters.Checkmark}
+    {id: "board_member", name: "Board Member", cssClass: "cell-board-member", field: "is_a_board_member", formatter: Slick.Formatters.Checkmark},
+    {id: "volunteer", name: "Volunteer", cssClass: "cell-board-member", field: "is_a_volunteer", formatter: Slick.Formatters.Checkmark}
   ];
   var options = {
     enableCellNavigation: true,
+    forceFitColumns: true,
     enableColumnReorder: false
   };
   $.getJSON('/members', function(data) {

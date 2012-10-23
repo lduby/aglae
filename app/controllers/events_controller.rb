@@ -54,4 +54,9 @@ class EventsController < ApplicationController
     end
     redirect_to '/calendar/index'
   end
+
+  def volunteer
+    @event = Event.find(params[:id])
+    @event.voluntary_works << VoluntaryWork.new(:member_id => current_user.member_profile.id, :volunteered_at => Time.now)
+  end
 end

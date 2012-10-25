@@ -15,6 +15,7 @@ $(document).ready(function() {
     }
    }
   );
+
   var grid;
   var columns = [
     {id: "id", name: "ID", field: "id"},
@@ -32,10 +33,36 @@ $(document).ready(function() {
     enableColumnReorder: false
   };
   $.getJSON('/members', function(data) {
-      grid = new Slick.Grid("#membersGrid", data, columns, options);
+      grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
       $("#membersGrid").show();
+      $(".btn").click(
+        function (event) {
+          alert($(this).attr("id")+" has been clicked");
+          event.preventDefault();
+          $("#membersGrid").hide;
+          if ($(this).attr("id") == "all_members_view") {
+            grid = new Slick.Grid("#membersGrid", data["all_members"], columns, options);
+          }
+          else if ($(this).attr("id") == "board_members_view") {
+            grid = new Slick.Grid("#membersGrid", data["board_members"], columns, options);
+          }
+          else if ($(this).attr("id") == "volunteers_view") {
+            grid = new Slick.Grid("#membersGrid", data["volunteers"], columns, options);
+          }
+          else {
+            grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
+          }
+          $("#membersGrid").show();
+          $(".btn").removeClass("active");
+          $(this).addClass("active");
+        }
+      );
     });
  });
+
+  
+
+
 </script>
 
 <br/>
@@ -45,11 +72,11 @@ $(document).ready(function() {
   </div>
   <div class="span10">
     <div class="btn-group">
-      <button class="btn active">All</button>
-      <button class="btn">Board</button>
-      <button class="btn">Volunteers</button>
-      <button class="btn">Late</button>
-      <button class="btn">Inactive</button>
+      <button id="all_members_view" class="btn active">All</button>
+      <button id="board_members_view" class="btn">Board</button>
+      <button id="volunteers_view" class="btn">Volunteers</button>
+      <button id="late_members_view" class="btn">Late</button>
+      <button id="inactive_members_view" class="btn">Inactive</button>
     </div>
   </div>
 </div>

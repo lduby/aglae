@@ -4,8 +4,23 @@ class MembersController < ApplicationController
   respond_to :html, :xml, :json
   def index
     @members = @members.accessible_by(current_ability)
-    logger.debug(@members.size)
-    respond_with(@members)
+    @all_members = Member.all
+    @board_members = Array.new
+    @all_members.each do |m|
+      if m.is_a_board_member
+        @board_members << m
+      end
+    end
+    @volunteers = Array.new
+    @all_members.each do |v|
+      if v.is_a_volunteer
+        @volunteers << v
+      end
+    end
+
+
+    #respond_with(@members)
+    respond_with({ :members => @members, :all_members => @all_members, :board_members => @board_members, :volunteers => @volunteers})
 #    respond_to do |format|
 #      format.html
 #      format.json { 

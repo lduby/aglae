@@ -15,7 +15,7 @@ class Member < ActiveRecord::Base
     # just in case someone says as_json(nil) and bypasses
     # our default...
     super((options || { }).merge({
-        :methods => [:name, :children_count, :is_local, :is_a_board_member, :last_entered_board_at, :is_a_volunteer, :last_volunteered_at]
+        :methods => [:name, :children_count, :is_local, :is_a_board_member, :last_entered_board_at, :is_a_volunteer, :last_volunteered_at, :first_volunteered_at]
     }))
   end
 
@@ -51,6 +51,12 @@ class Member < ActiveRecord::Base
   def last_volunteered_at
     if self.voluntary_works.size > 0
       self.voluntary_works.last.volunteered_at
+    end
+  end
+
+  def first_volunteered_at
+    if self.voluntary_works.size > 0
+      self.voluntary_works.first.volunteered_at
     end
   end
 

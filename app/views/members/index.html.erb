@@ -27,6 +27,27 @@ $(document).ready(function() {
     {id: "board_member", name: "Board Member", cssClass: "cell-board-member", field: "is_a_board_member", formatter: Slick.Formatters.Checkmark},
     {id: "volunteer", name: "Volunteer", cssClass: "cell-board-member", field: "is_a_volunteer", formatter: Slick.Formatters.Checkmark}
   ];
+  var board_columns = [
+    {id: "id", name: "ID", field: "id"},
+    {id: "type", name: "Type", cssClass: "cell-member-type", field: "member_type", formatter: Slick.Formatters.MemberType},
+    {id: "name", name: "Name", field: "name"},
+    {id: "local", name: "Local", cssClass: "cell-local-member", field: "is_local", formatter: Slick.Formatters.Locality},
+    {id: "children_count", name: "Children", field: "children_count"},
+    {id: "joined_at", name: "Since", field: "created_at"},
+    {id: "board_entry", name: "Joined Board on", field: "last_entered_board_at"},
+    {id: "volunteer", name: "Volunteer", cssClass: "cell-board-member", field: "is_a_volunteer", formatter: Slick.Formatters.Checkmark}
+  ];
+  var volunteers_columns = [
+    {id: "id", name: "ID", field: "id"},
+    {id: "type", name: "Type", cssClass: "cell-member-type", field: "member_type", formatter: Slick.Formatters.MemberType},
+    {id: "name", name: "Name", field: "name"},
+    {id: "local", name: "Local", cssClass: "cell-local-member", field: "is_local", formatter: Slick.Formatters.Locality},
+    {id: "children_count", name: "Children", field: "children_count"},
+    {id: "joined_at", name: "Since", field: "created_at"},
+    {id: "first_voluntary_work", name: "First work", field: "first_volunteered_at"},
+    {id: "last_voluntary_work", name: "Last work", field: "Last_volunteered_at"},
+    {id: "board_member", name: "Board Member", cssClass: "cell-board-member", field: "is_a_board_member", formatter: Slick.Formatters.Checkmark}
+  ];
   var options = {
     enableCellNavigation: true,
     forceFitColumns: true,
@@ -35,7 +56,7 @@ $(document).ready(function() {
   $.getJSON('/members', function(data) {
       grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
       $("#membersGrid").show();
-      $(".btn").click(
+      $(".view").click(
         function (event) {
           alert($(this).attr("id")+" has been clicked");
           event.preventDefault();
@@ -44,12 +65,15 @@ $(document).ready(function() {
             grid = new Slick.Grid("#membersGrid", data["all_members"], columns, options);
           }
           else if ($(this).attr("id") == "board_members_view") {
-            grid = new Slick.Grid("#membersGrid", data["board_members"], columns, options);
+            grid = new Slick.Grid("#membersGrid", data["board_members"], board_columns, options);
           }
           else if ($(this).attr("id") == "volunteers_view") {
-            grid = new Slick.Grid("#membersGrid", data["volunteers"], columns, options);
+            grid = new Slick.Grid("#membersGrid", data["volunteers"], volunteers_columns, options);
           }
-          else {
+          else if ($(this).attr("id") == "late_members_view"){
+            grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
+          }
+          else if ($(this).attr("id") == "inactive_members_view"){
             grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
           }
           $("#membersGrid").show();
@@ -72,11 +96,11 @@ $(document).ready(function() {
   </div>
   <div class="span10">
     <div class="btn-group">
-      <button id="all_members_view" class="btn active">All</button>
-      <button id="board_members_view" class="btn">Board</button>
-      <button id="volunteers_view" class="btn">Volunteers</button>
-      <button id="late_members_view" class="btn">Late</button>
-      <button id="inactive_members_view" class="btn">Inactive</button>
+      <button id="all_members_view" class="btn view active">All</button>
+      <button id="board_members_view" class="btn view">Board</button>
+      <button id="volunteers_view" class="btn view">Volunteers</button>
+      <button id="late_members_view" class="btn view">Late</button>
+      <button id="inactive_members_view" class="btn view">Inactive</button>
     </div>
   </div>
 </div>

@@ -1,50 +1,50 @@
 /*Now the styles*/
-* {
+/** {
   margin: 0; 
   padding: 0;
 }
-/*body {
+body {
   background: #ccc; 
   font-family: arial, verdana, tahoma;
 }*/
 
 /*Time to apply widths for accordian to work
 Width of image = 640px
-total images = 3
+total images = 5
 so width of hovered image = 640px
-width of un-hovered image = 100px - you can set this to anything
-so total container width = 640 + 100*2 = 840px;
-default width = 840/3 = 280px;
+width of un-hovered image = 40px - you can set this to anything
+so total container width = 640 + 40*4 = 800px;
+default width = 800/5 = 160px;
 */
 
-.accordian {
-  background: #ccc; 
-  font-family: arial, verdana, tahoma;
-  /*width: 845px; */
+.myaccordian {
+  width: 805px; 
   height: 320px;
   overflow: hidden;
   
   /*Time for some styling*/
-  margin: 0px auto;
+  /*margin: 100px auto;*/
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
   -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.35);
 }
 
 /*A small hack to prevent flickering on some browsers*/
-.accordian ul {
-  /*width: 2000px;*/
-  margin: 0 0 0 0;
+.myaccordian ul {
+  width: 2000px;
   /*This will give ample space to the last item to move
   instead of falling down/flickering during hovers.*/
+  margin: 0 0 0 0;
+  /* This will override bootstrap margin for ul */
+
 }
 
-.accordian li {
+.myaccordian li {
   position: relative;
   display: block;
-  /*width: 280px;*/
-  width: 25%
-  /*height: 320px;*/
+  width: 160px;
+  height: 320px;
+  /*width: 20%;*/
   float: left;
   
   border-left: 1px solid #888;
@@ -62,26 +62,28 @@ default width = 840/3 = 280px;
 }
 
 /*Reduce with of un-hovered elements*/
-.accordian ul:hover li {width: 25%;}
+.myaccordian ul:hover li {width: 40px;}
+/*.myaccordian ul:hover li {width: 20%;}*/
 /*Lets apply hover effects now*/
 /*The LI hover style should override the UL hover style*/
-.accordian ul li:hover {width: 840px;}
-.accordian > ul > li > a:hover {}
+.myaccordian ul li:hover {width: 640px;}
 
-.accordian li img {
+
+.myaccordian li img {
   display: block;
+  /*min-height: 320px;*/
   max-width: none;
 }
 
 /*Image title styles*/
-.image_title {
+.myaccordian_image_title {
   background: rgba(0, 0, 0, 0.5);
   position: absolute;
   left: 0; bottom: 0; 
-  width: 840px; 
+width: 640px; 
 
 }
-.image_title a {
+.myaccordian_image_title a {
   display: block;
   color: #fff;
   text-decoration: none;

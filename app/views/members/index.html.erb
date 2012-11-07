@@ -2,17 +2,20 @@
 
 $(document).ready(function() {
  //load_members_list();
- $("#newmemberdiv a").click(
+ $("a.action").click(
   function (event) {
     event.preventDefault();
-    if   ($("#memberform").text() == "") {
+    /*if   ($("#memberform").text() == "") {
       $("#memberform").hide();
       $("#memberform").load("/members/ajnewmember", function(responseText, statusText, xhr) {
           $("#memberform").slideToggle();
         });
     } else {
       $("#memberform").slideToggle('slow', function () {$("#memberform").empty();});
-    }
+    }*/
+    //$("#memberform").hide();
+    //$("#member_details_zone").hide();
+    $("#member_details").load("/members/ajnewmember");
    }
   );
 
@@ -55,6 +58,29 @@ $(document).ready(function() {
   };
   $.getJSON('/members', function(data) {
       grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
+      grid.setSelectionModel(new Slick.RowSelectionModel());
+      grid.onSelectedRowsChanged.subscribe(function() {
+        var selRows = grid.getSelectedRows();
+        for (var i = 0, l = selRows.length; i < l; i++) {
+          var gridData = grid.getData();
+          alert(gridData);
+          alert("getting "+selRows[i]+"th object");
+          var item = gridData[selRows[i]];
+          if (item) {
+            var rowId = item.id;
+            alert("member_Id = "+rowId);
+            //$("#memberform").hide();
+            //$("#member_details_zone").hide();
+            $("#member_details").load("/members/"+rowId+"/jsshow");
+            //$("#member_details_zone").show();
+          }
+        }
+        //selected_member_id = grid.getRow(row_ids);
+        //alert(row_ids+"[ member "+selected_member_id+"] has been clicked");
+
+        //$("#memberform").hide();
+        //$("#memberform").load("/members/ajnewmember"
+      });
       $("#membersGrid").show();
       $(".view").click(
         function (event) {
@@ -76,6 +102,7 @@ $(document).ready(function() {
           else if ($(this).attr("id") == "inactive_members_view"){
             grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
           }
+          grid.setSelectionModel(new Slick.RowSelectionModel());
           $("#membersGrid").show();
           $(".btn").removeClass("active");
           $(this).addClass("active");
@@ -91,10 +118,10 @@ $(document).ready(function() {
 
 <br/>
 <div class="row-fluid">
-  <div class="span2">
+  <div class="span2" id="title">
     <h1>Members</h1>
   </div>
-  <div class="span10">
+  <div class="span8" id="views_toolbar">
     <div class="btn-group">
       <button id="all_members_view" class="btn view active">All</button>
       <button id="board_members_view" class="btn view">Board</button>
@@ -103,48 +130,23 @@ $(document).ready(function() {
       <button id="inactive_members_view" class="btn view">Inactive</button>
     </div>
   </div>
+  <div class="span2 pull-right" id="actions_toolbar">
+    <div class="btn-group">
+      <a id="newmemberbutton" class="btn action" href="<%= new_member_path %>">New Member</a>
+    </div>
+  </div>
 </div>
 
 <br/>
 <div class="row-fluid">
-<div class="span8">
-<div id="memberslist">
-  <div id="membersGrid" style="width:100%; height:500px;"></div>
+  <div class="span8">
+    <div id="memberslist">
+      <div id="membersGrid" style="width:100%; height:500px;"></div>
+    </div>
+  </div>
+  <div id="member_details" class="span4 well">
+    <div id="memberform" class="form"></div>
+    <div id="member_details_zone" class="span4 well" style="display: block;"></div>
+  </div>
+  <!-- <div id="member_details_zone" class="span4 well" style="display: block;"></div> -->
 </div>
-</div>
-<!-- <div class="span4 well">
-
-<div id="memberdetails" class="details">
-Click a member to view it.
-</div>
-</div>-->
-<div class="span4 well">
-<div id="newmemberdiv"><a id="newmemberbutton" class="btn" href="<%= new_member_path %>">New Member</a></div>
-
-<div id="memberform" class="form"></div>
-</div>
-</div>
-
-
-<script>
-  
-
-  /*$(function () {
-    var data = [];
-    for (var i = 0; i < 500; i++) {
-      data[i] = {
-        title: "Task " + i,
-        duration: "5 days",
-        percentComplete: Math.round(Math.random() * 100),
-        start: "01/01/2009",
-        finish: "01/05/2009",
-        effortDriven: (i % 5 == 0)
-      };
-    }*/
-    
-    
-
-    /*grid = new Slick.Grid("#membersGrid", data, columns, options);
-    $("#membersGrid").show(); */
-  })
-</script>

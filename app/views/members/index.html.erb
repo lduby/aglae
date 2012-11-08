@@ -5,17 +5,12 @@ $(document).ready(function() {
  $("a.action").click(
   function (event) {
     event.preventDefault();
-    /*if   ($("#memberform").text() == "") {
-      $("#memberform").hide();
-      $("#memberform").load("/members/ajnewmember", function(responseText, statusText, xhr) {
-          $("#memberform").slideToggle();
-        });
-    } else {
-      $("#memberform").slideToggle('slow', function () {$("#memberform").empty();});
-    }*/
-    //$("#memberform").hide();
-    //$("#member_details_zone").hide();
-    $("#member_details").load("/members/ajnewmember");
+    hide_load_and_show_div("#member_details","/members/ajnewmember");
+    /*$("#member_details").hide('slow');
+    $("#member_details").load("/members/ajnewmember", function() {
+      $(this).show('slow');
+
+    });*/
    }
   );
 
@@ -57,53 +52,48 @@ $(document).ready(function() {
     enableColumnReorder: false
   };
   $.getJSON('/members', function(data) {
-      grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
+      create_load_and_display_data_grid("#membersGrid",data["members"], columns, options, "#member_details", "members", "jsshow" );
+      /*grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
       grid.setSelectionModel(new Slick.RowSelectionModel());
       grid.onSelectedRowsChanged.subscribe(function() {
         var selRows = grid.getSelectedRows();
         for (var i = 0, l = selRows.length; i < l; i++) {
           var gridData = grid.getData();
-          alert(gridData);
-          alert("getting "+selRows[i]+"th object");
           var item = gridData[selRows[i]];
           if (item) {
             var rowId = item.id;
-            alert("member_Id = "+rowId);
-            //$("#memberform").hide();
-            //$("#member_details_zone").hide();
+            $("#member_details").hide();
             $("#member_details").load("/members/"+rowId+"/jsshow");
-            //$("#member_details_zone").show();
+            $("#member_details").show();
           }
         }
-        //selected_member_id = grid.getRow(row_ids);
-        //alert(row_ids+"[ member "+selected_member_id+"] has been clicked");
-
-        //$("#memberform").hide();
-        //$("#memberform").load("/members/ajnewmember"
       });
-      $("#membersGrid").show();
+      $("#membersGrid").show();*/
       $(".view").click(
         function (event) {
           alert($(this).attr("id")+" has been clicked");
           event.preventDefault();
           $("#membersGrid").hide;
           if ($(this).attr("id") == "all_members_view") {
-            grid = new Slick.Grid("#membersGrid", data["all_members"], columns, options);
+            //grid = new Slick.Grid("#membersGrid", data["all_members"], columns, options);
+            create_load_and_display_data_grid("#membersGrid",data["all_members"], columns, options, "#member_details", "members", "jsshow" );
           }
           else if ($(this).attr("id") == "board_members_view") {
-            grid = new Slick.Grid("#membersGrid", data["board_members"], board_columns, options);
+            //grid = new Slick.Grid("#membersGrid", data["board_members"], board_columns, options);
+            create_load_and_display_data_grid("#membersGrid", data["board_members"], board_columns, options, "#member_details", "members", "jsshow" );
           }
           else if ($(this).attr("id") == "volunteers_view") {
-            grid = new Slick.Grid("#membersGrid", data["volunteers"], volunteers_columns, options);
+            //grid = new Slick.Grid("#membersGrid", data["volunteers"], volunteers_columns, options);
+            create_load_and_display_data_grid("#membersGrid", data["volunteers"], volunteers_columns, options, "#member_details", "members", "jsshow" );
           }
           else if ($(this).attr("id") == "late_members_view"){
-            grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
+            //grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
           }
           else if ($(this).attr("id") == "inactive_members_view"){
-            grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
+            //grid = new Slick.Grid("#membersGrid", data["members"], columns, options);
           }
-          grid.setSelectionModel(new Slick.RowSelectionModel());
-          $("#membersGrid").show();
+          //grid.setSelectionModel(new Slick.RowSelectionModel());
+          //$("#membersGrid").show();
           $(".btn").removeClass("active");
           $(this).addClass("active");
         }
@@ -144,9 +134,5 @@ $(document).ready(function() {
       <div id="membersGrid" style="width:100%; height:500px;"></div>
     </div>
   </div>
-  <div id="member_details" class="span4 well">
-    <div id="memberform" class="form"></div>
-    <div id="member_details_zone" class="span4 well" style="display: block;"></div>
-  </div>
-  <!-- <div id="member_details_zone" class="span4 well" style="display: block;"></div> -->
+  <div id="member_details" class="span4 well"></div>
 </div>

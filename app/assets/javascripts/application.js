@@ -14,6 +14,13 @@
 //= require jquery_ujs
 //= require_tree .
 
+function hide_load_and_show_div(divname,url) {
+  $(divname).hide();
+  $(divname).load(url, function() {
+      $(this).show('slow');
+  });
+}
+
 function clear_members_details() {
   $("#memberdetails").text("Click a member to view it.");
 }

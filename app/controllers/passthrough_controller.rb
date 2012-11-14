@@ -4,7 +4,7 @@ class PassthroughController < ApplicationController
     if !user_signed_in?
       path = home_index_path
     else 
-      if current_user.is?("CA_member")
+      if current_user.is?("board_member")
         path = home_dashboard_path
       elsif current_user.is?('employee')
         path = home_dashboard_path
@@ -15,6 +15,8 @@ class PassthroughController < ApplicationController
         path = home_index_path
       end
     end
+    logger.debug("path = ")
+    logger.debug(path)
     redirect_to path     
   end
 end

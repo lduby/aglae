@@ -21,6 +21,31 @@ function hide_load_and_show_div(divname,url) {
   });
 }
 
+function open_tab(title,content_url) {
+  //alert("Tab title = "+title);
+  //alert("Content url = "+content_url);
+  var tab_header = "<li><a class='tab-header' href=\"#"+title.replace(" ",'_')+"\" data-toggle=\"tab\"><button class=\"close tab-close-button\" type=\"button\" onclick=\"close_tab($(this),$(this).closest('a').attr('href'));\">×</button>"+title+"</a></li>";
+  $("ul.nav-tabs").append(tab_header);
+  //$("ul.nav-tabs").append("<li><a class='tab-header' href=\"#"+title.replace(" ",'_')+"\" data-toggle=\"tab\">"+title+"</a><a href=\"#\" class=\"close tab-close-button\">x</a></li>");
+  $(".tab-pane.active").removeClass("active");
+  $(".tab-content").append("<div class=\"tab-pane active\" id=\""+title.replace(" ",'_')+"\"></div>");
+  $("#"+title.replace(" ",'_')).load(content_url, function() {
+      $(this).show('slow');
+  });
+  $('#dashboardTabs a[href="#'+title.replace(" ",'_')+'"]').tab('show');
+}
+
+function close_tab(tab_button,tab_content_anchor) {
+  alert(tab_content_anchor);
+  //$('#dashboardTabs a[href="'+tab_content_anchor+'"]').tab('hide');
+  $(tab_button).closest('li').remove();
+  $(tab_content_anchor).remove();
+  // retour au tab par defaut
+  $('#dashboardTabs a[href="#dashboard"]').tab('show');
+  $("#dashboard.tab-pane").addClass("active");
+  $("#dashboard").show();
+}
+
 function clear_members_details() {
   $("#memberdetails").text("Click a member to view it.");
 }

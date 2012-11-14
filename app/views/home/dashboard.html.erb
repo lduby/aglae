@@ -1,10 +1,34 @@
+<script>
+
+$(document).ready(function() {
+  $("#actions a").click(
+    function (event) {
+      event.preventDefault();
+      open_tab($(this).text(),$(this).attr("href"));
+    }
+  );
+});
+
+  
+$(document).ready(function() {
+  $(".tab-close-button").on("click",
+    function (event) {
+      event.stopImmediatePropagation();
+      event.preventDefault();
+      close_tab($(this).closest("a").attr("href"));
+    }
+  );
+});
+
+</script>
+
 <br>
 <div class="container-fluid">
   <div class="row-fluid">
     <div id="actions" class="well span3">
       <ul class="nav nav-list">
         <li class="nav-header">Members management</li>
-        <li class="active"><a href="#">New member</a></li>
+        <li class="active"><a href=<%= members_ajnewmember_path %>>New member</a></li>
         <li><a href="#">Membership renewal</a></li>
         <li class="nav-header">Game borrowings</li>
         <li><a href="#">New Game Card</a></li>
@@ -15,22 +39,29 @@
       </ul>
     </div>
     <div id="main" class="span6">
-      <div id="presence" class="well">
-        Presence: # children - # adults - # total
-      </div>
-      <div id="late_members" class="well">
-        <ul>
-          <li>Member 2767 - Member name - Membership ends 02/02/2012 - Button to renew</li>
-          <li>Member 2767 - Member name - Membership ends 02/02/2012 - Button to renew</li>
-          <li>Member 2767 - Member name - Membership ends 02/02/2012 - Button to renew</li>
-        </ul>
-      </div>
-      <div id="late_games" class="well">
-        <ul>
-          <li>Game 3002 - Game name - Expected for yesterday - Borrower - Button to register back in</li>
-          <li>Game 3002 - Game name - Expected for yesterday - Borrower - Button to register back in</li>
-          <li>Game 3002 - Game name - Expected for yesterday - Borrower - Button to register back in</li>
-        </ul>
+      <ul class="nav nav-tabs" id="dashboardTabs">
+        <li><a href="#dashboard" data-toggle="tab">Dashboard</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="dashboard">
+          <div id="presence" class="well">
+            Presence: # children - # adults - # total
+          </div>
+          <div id="late_members" class="well">
+            <ul>
+              <li>Member 2767 - Member name - Membership ends 02/02/2012 - Button to renew</li>
+              <li>Member 2767 - Member name - Membership ends 02/02/2012 - Button to renew</li>
+              <li>Member 2767 - Member name - Membership ends 02/02/2012 - Button to renew</li>
+            </ul>
+          </div>
+          <div id="late_games" class="well">
+            <ul>
+              <li>Game 3002 - Game name - Expected for yesterday - Borrower - Button to register back in</li>
+              <li>Game 3002 - Game name - Expected for yesterday - Borrower - Button to register back in</li>
+              <li>Game 3002 - Game name - Expected for yesterday - Borrower - Button to register back in</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <div id="current" class="well span3">

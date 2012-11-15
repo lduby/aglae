@@ -24,6 +24,11 @@ Aglae::Application.routes.draw do
   get 'home/index'
   get 'home/dashboard'
   get 'calendar/index'
+  get 'preferences/toy_library'
+  get 'preferences/members_management'
+  get 'preferences/games_management'
+  get 'preferences/activities_management'
+  get 'preferences/accountancy'
   
   resources :members do
     resources :children

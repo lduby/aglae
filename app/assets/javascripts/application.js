@@ -22,11 +22,9 @@ function hide_load_and_show_div(divname,url) {
 }
 
 function open_tab(title,content_url) {
-  //alert("Tab title = "+title);
-  //alert("Content url = "+content_url);
+  //Créer un tab si le tab n'existe pas déja
   var tab_header = "<li><a class='tab-header' href=\"#"+title.replace(" ",'_')+"\" data-toggle=\"tab\"><button class=\"close tab-close-button\" type=\"button\" onclick=\"close_tab($(this),$(this).closest('a').attr('href'));\">×</button>"+title+"</a></li>";
   $("ul.nav-tabs").append(tab_header);
-  //$("ul.nav-tabs").append("<li><a class='tab-header' href=\"#"+title.replace(" ",'_')+"\" data-toggle=\"tab\">"+title+"</a><a href=\"#\" class=\"close tab-close-button\">x</a></li>");
   $(".tab-pane.active").removeClass("active");
   $(".tab-content").append("<div class=\"tab-pane active\" id=\""+title.replace(" ",'_')+"\"></div>");
   $("#"+title.replace(" ",'_')).load(content_url, function() {
@@ -44,6 +42,47 @@ function close_tab(tab_button,tab_content_anchor) {
   $('#dashboardTabs a[href="#dashboard"]').tab('show');
   $("#dashboard.tab-pane").addClass("active");
   $("#dashboard").show();
+}
+
+function create_load_and_display_editable_grid(griddiv, data, columns, options) {
+  var grid = new Slick.Grid(griddiv, data, columns, options);
+  grid.setSelectionModel(new Slick.CellSelectionModel());
+  grid.onCellChange.subscribe(function (e, args) {
+    var item = args.item;
+    var column = args.cell;
+    var row = args.row;
+    var value = data[args.row][grid.getColumns()[args.cell].field];
+    var id = args.item.id;
+    var field = grid.getColumns()[args.cell].field;
+    var dataString = "&member_category["+field+"]="+value;
+    alert("dataString="+dataString);
+    var status = false;
+    $.ajax({
+        type: 'PUT',
+        url: '/member_categories/'+id,
+        data: dataString,
+        dataType: "script",
+        success: function(a) {  
+            console.log(data);              
+            if(a.status) {                  
+                grid.invalidateRow(data.length);
+                data.push(item);
+                grid.updateRowCount();
+                grid.render();
+            }
+        }
+    });
+    //console.log(args); 
+  });
+  grid.onAddNewRow.subscribe(function (e, args) {
+      var item = args.item;
+      alert(item);
+      grid.invalidateRow(data.length);
+      data.push(item);
+      grid.updateRowCount();
+      grid.render();
+    });
+  $(griddiv).show();
 }
 
 function clear_members_details() {

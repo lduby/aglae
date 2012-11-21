@@ -37,6 +37,9 @@ Aglae::Application.routes.draw do
       get "show_profile"
     end
   end
+  resources :member_categories
+  #post 'members_categories/:id/edit'
+  #match 'members_categories/:id/update' => 'member_categories#update', :via => :put
   resources :games do
     resources :game_copies
   end

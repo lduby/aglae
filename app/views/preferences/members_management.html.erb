@@ -1,6 +1,27 @@
 <script type="text/javascript">
+  function requiredFieldValidator(value) {
+    if (value == null || value == undefined || !value.length) {
+      return {valid: false, msg: "This is a required field"};
+    } else {
+      return {valid: true, msg: null};
+    }
+  }
+
   $(document).ready(function() {
-    $('#preferencesTab a').first.tab('show');
+    var member_categories_columns = [
+      {id: "title", name: "Title", field: "title", width: 150, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
+      {id: "description", name: "Description", field: "description", width: 450, editor: Slick.Editors.LongText}
+    ];
+    var options = {
+      editable: true,
+      enableAddRow: true,
+      enableCellNavigation: true,
+      forceFitColumns: true,
+      enableColumnReorder: false
+    };
+    $.getJSON('/member_categories', function(data) {
+      create_load_and_display_editable_grid("#member_types",data, member_categories_columns, options);
+    });
   });
 </script>
 <br>
@@ -10,7 +31,7 @@
     <li class=""><a href="#membership_types" data-toggle="tab">Membership Types</a></li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="member_types">
+    <div class="tab-pane active" id="member_types" style="width:600px;height:500px;">
       <p>Editable grid for CRUD actions on member types</p>
     </div>
     <div class="tab-pane" id="membership_types">

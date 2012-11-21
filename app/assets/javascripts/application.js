@@ -55,7 +55,7 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
     var id = args.item.id;
     var field = grid.getColumns()[args.cell].field;
     var dataString = "&member_category["+field+"]="+value;
-    alert("dataString="+dataString);
+    alert("editing dataString="+dataString);
     var status = false;
     $.ajax({
         type: 'PUT',
@@ -75,13 +75,30 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
     //console.log(args); 
   });
   grid.onAddNewRow.subscribe(function (e, args) {
-      var item = args.item;
-      alert(item);
-      grid.invalidateRow(data.length);
-      data.push(item);
-      grid.updateRowCount();
-      grid.render();
+    var item = args.item;
+    var field = args.column.field;
+    var value = item[args.column.id];
+    var dataString = "&member_category["+field+"]="+value;
+    alert("creation dataString="+dataString);
+    var status = false;
+    $.ajax({
+        type: 'POST',
+        url: '/member_categories',
+        data: dataString,
+        dataType: "json",
+        success: function(a) {  
+            console.log(data);              
+            if(a.status) {                  
+                id=id+1;
+                item["id"] = "id_"+id;
+                data.push(item);
+                dataView.beginUpdate();
+                dataView.setItems(data);
+                dataView.endUpdate();
+            }
+        }
     });
+  });
   $(griddiv).show();
 }
 

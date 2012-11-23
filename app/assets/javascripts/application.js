@@ -61,10 +61,11 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
         type: 'PUT',
         url: '/member_categories/'+id,
         data: dataString,
-        dataType: "script",
+        dataType: "json",
         success: function(a) {  
-            console.log(data);              
-            if(a.status) {                  
+            alert("update ajax query ok");   
+            //console.log(data);              
+            if(a.status) {               
                 grid.invalidateRow(data.length);
                 data.push(item);
                 grid.updateRowCount();
@@ -81,20 +82,25 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
     var dataString = "&member_category["+field+"]="+value;
     alert("creation dataString="+dataString);
     var status = false;
+    var id = grid.getDataLength();
     $.ajax({
         type: 'POST',
         url: '/member_categories',
         data: dataString,
         dataType: "json",
-        success: function(a) {  
-            console.log(data);              
+        success: function(a) {      
+            alert("create ajax query ok"); 
+            console.log(data);  
+            var jsonObject = jQuery.parseJSON(a);
             if(a.status) {                  
-                id=id+1;
-                item["id"] = "id_"+id;
+                id=data[data.length - 1].id;
+                item["id"] = id;
                 data.push(item);
-                dataView.beginUpdate();
-                dataView.setItems(data);
-                dataView.endUpdate();
+                //dataView.beginUpdate();
+                //dataView.setItems(data);
+                //dataView.endUpdate();
+                grid.updateRowCount();
+                grid.render();
             }
         }
     });

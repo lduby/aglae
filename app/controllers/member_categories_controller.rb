@@ -14,7 +14,8 @@ class MemberCategoriesController < ApplicationController
     logger.debug(params)
     @member_category = MemberCategory.find(params["id"])
     if @member_category.update_attributes(params[:member_category])
-      respond_with(:status => :ok)
+      @member_categories = MemberCategory.all
+      respond_with(:status => :ok, :location => @member_categories)
     else
       respond_with(@member_category.errors, :status => :unprocessable_entity)
     end
@@ -26,10 +27,12 @@ class MemberCategoriesController < ApplicationController
   def create
     @member_category = MemberCategory.new(params[:member_category])
     if @member_category.save
-      @member_categories = @member_categories.accessible_by(current_ability)
-      respond_with(@member_category, :status => :created, :location => @member_categories) do |format|
-        format.json { head :ok }
-      end
+      #@member_categories = MemberCategory.all
+      respond_with({:status => "success"}, :location => "nil")
+      #respond_with(@member_category, :status => :ok, :location => @member_categories) do |format|
+      #  format.json { head :ok }
+      #end
+
     else
       respond_with(@member_categories.errors, :status => :unprocessable_entity)
     end

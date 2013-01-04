@@ -5,6 +5,8 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+    #@games_list_lines = (@games.size/3).ceil
+    @games_list_lines = (@games.size.to_f / 3).ceil
   end
 
   def create

@@ -44,7 +44,7 @@ function close_tab(tab_button,tab_content_anchor) {
   $("#dashboard").show();
 }
 
-function create_load_and_display_editable_grid(griddiv, data, columns, options) {
+function create_load_and_display_editable_grid(griddiv, data, columns, options, controller, model_name) {
   var grid = new Slick.Grid(griddiv, data, columns, options);
   grid.setSelectionModel(new Slick.CellSelectionModel());
   grid.onCellChange.subscribe(function (e, args) {
@@ -54,12 +54,13 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
     var value = data[args.row][grid.getColumns()[args.cell].field];
     var id = args.item.id;
     var field = grid.getColumns()[args.cell].field;
-    var dataString = "&member_category["+field+"]="+value;
+    //var dataString = "&member_category["+field+"]="+value;
+    var dataString = "&"+model_name+"["+field+"]="+value;
     alert("editing dataString="+dataString);
     var status = false;
     $.ajax({
         type: 'PUT',
-        url: '/member_categories/'+id,
+        url: '/'+controller+'/'+id,
         data: dataString,
         dataType: "json",
         success: function(a) {  
@@ -79,13 +80,14 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
     var item = args.item;
     var field = args.column.field;
     var value = item[args.column.id];
-    var dataString = "&member_category["+field+"]="+value;
+    //var dataString = "&member_category["+field+"]="+value;
+    var dataString = "&"+model_name+"["+field+"]="+value;
     alert("creation dataString="+dataString);
     var status = false;
     var id = grid.getDataLength();
     $.ajax({
         type: 'POST',
-        url: '/member_categories',
+        url: '/'+controller,
         data: dataString,
         dataType: "json",
         success: function(a) {      
@@ -93,7 +95,8 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
             console.log(data);  
             var jsonObject = jQuery.parseJSON(a);
             if(a.status) {                  
-                id=data[data.length - 1].id;
+                grid.invalidateRow(data.length);
+                did=data[data.length - 1].id;
                 item["id"] = id;
                 data.push(item);
                 //dataView.beginUpdate();
@@ -104,6 +107,82 @@ function create_load_and_display_editable_grid(griddiv, data, columns, options) 
             }
         }
     });
+  });
+  $(griddiv).show();
+}
+
+function create_load_and_display_editable_grid_with_selectable_column(griddiv, data, columns, options, controller, model_name, selectable_column_id, selectable_data_controller) {
+  var grid = new Slick.Grid(griddiv, data, columns, options);
+  grid.setSelectionModel(new Slick.CellSelectionModel());
+  grid.onCellChange.subscribe(function (e, args) {
+    var item = args.item;
+    var column = args.cell;
+    var row = args.row;
+    var value = data[args.row][grid.getColumns()[args.cell].field];
+    var id = args.item.id;
+    var field = grid.getColumns()[args.cell].field;
+    //var dataString = "&member_category["+field+"]="+value;
+    var dataString = "&"+model_name+"["+field+"]="+value;
+    alert("editing dataString="+dataString);
+    var status = false;
+    $.ajax({
+        type: 'PUT',
+        url: '/'+controller+'/'+id,
+        data: dataString,
+        dataType: "json",
+        success: function(a) {
+            alert("update ajax query ok");
+            //console.log(data);              
+            if(a.status) {
+                grid.invalidateRow(data.length);
+                data.push(item);
+                grid.updateRowCount();
+                grid.render();
+            }
+        }
+    });
+    //console.log(args); 
+  });
+  grid.onAddNewRow.subscribe(function (e, args) {
+    var item = args.item;
+    var field = args.column.field;
+    var value = item[args.column.id];
+    //var dataString = "&member_category["+field+"]="+value;
+    var dataString = "&"+model_name+"["+field+"]="+value;
+    alert("creation dataString="+dataString);
+    var status = false;
+    var id = grid.getDataLength();
+    $.ajax({
+        type: 'POST',
+        url: '/'+controller,
+        data: dataString,
+        dataType: "json",
+        success: function(a) {
+            alert("create ajax query ok");
+            console.log(data);
+            var jsonObject = jQuery.parseJSON(a);
+            if(a.status) {
+                grid.invalidateRow(data.length);
+                did=data[data.length - 1].id;
+                item["id"] = id;
+                data.push(item);
+                //dataView.beginUpdate();
+                //dataView.setItems(data);
+                //dataView.endUpdate();
+                grid.updateRowCount();
+                grid.render();
+            }
+        }
+    });
+  });
+  grid.onClick.subscribe(function (e) {
+      var cell = grid.getCellFromEvent(e);
+      if (grid.getColumns()[cell.cell].id == "priority") {
+        var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
+        data[cell.row].priority = states[data[cell.row].priority];
+        grid.updateRow(cell.row);
+        e.stopPropagation();
+      }
   });
   $(griddiv).show();
 }

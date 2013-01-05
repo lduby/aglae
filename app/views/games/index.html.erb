@@ -1,3 +1,33 @@
+<script>
+
+$(document).ready(function() {
+ //load_members_list();
+ $("a.action").click(
+  function (event) {
+    event.preventDefault();
+    hide_load_and_show_div("#game_details","/games/ajnewgame");
+    /*$("#member_details").hide('slow');
+    $("#member_details").load("/members/ajnewmember", function() {
+      $(this).show('slow');
+
+    });*/
+   }
+  );
+  $("li.game").click(
+  function (event) {
+    event.preventDefault();
+    hide_load_and_show_div("#game_details","/games/"+$(this).attr("id"));
+    /*$("#member_details").hide('slow');
+    $("#member_details").load("/members/ajnewmember", function() {
+      $(this).show('slow');
+
+    });*/
+   }
+  );
+});
+
+</script>
+
 <br/>
 <div class="row-fluid">
   <div class="span2" id="title">
@@ -14,7 +44,7 @@
   </div>
   <div class="span2 pull-right" id="actions_toolbar">
     <div class="btn-group">
-      <!-- <a id="newgamebutton" class="btn action" href="<%= new_game_path %>">New Game</a> -->
+      <a id="newgamebutton" class="btn action" href="<%= new_game_path %>">New Game</a>
     </div>
   </div>
 </div>
@@ -26,7 +56,7 @@
         <ul class="thumbnails">
           <% @games.slice(3 * (line - 1), 3).each do |game| %>
             <% unless game.nil? %>
-              <li class="span4">
+              <li class="span4 game" id=<%= game.id %>>
                 <div class="thumbnail">
                   <img src="img/default_game_cover.png" alt="">
                   <div class="caption">

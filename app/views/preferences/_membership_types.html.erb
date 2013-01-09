@@ -1,0 +1,21 @@
+<table class="table table-hover table-condensed">
+  <tr>
+    <th>Name</th>
+    <th>Target</th>
+    <th>Local ?</th>
+    <th>Duration</th>
+    <th>Fee</th>
+    <th>Description</th>
+  </tr>
+
+<% @membership_types.each do |mtype| %>
+  <tr id="membership_type_<%= mtype.id %>">
+    <td><%= best_in_place mtype, :name, :type => :input %></td>
+    <td><%= best_in_place mtype, :member_category_id, :type => :select, :collection => MemberCategory.all.collect {|c| [c.id, c.title]}%></td>
+    <td><%= best_in_place mtype, :is_for_local, :type => :checkbox, :collection => ["No", "Yes"] %></td>
+    <td><%= best_in_place mtype, :duration, :type => :input %> months</td>
+    <td><%= best_in_place mtype, :fee, :type => :input, :display_with => :number_to_currency, :helper_options => {:unit => "€"} %></td>
+    <td><%= best_in_place mtype, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %></td>
+  </tr>
+<% end %>
+</table>

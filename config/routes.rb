@@ -38,6 +38,7 @@ Aglae::Application.routes.draw do
     end
   end
   resources :member_categories
+  resources :membership_types
   #post 'members_categories/:id/edit'
   #match 'members_categories/:id/update' => 'member_categories#update', :via => :put
   resources :games do

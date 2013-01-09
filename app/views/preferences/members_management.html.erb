@@ -8,9 +8,20 @@
   }
 
   $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+
     var member_categories_columns = [
       {id: "title", name: "Title", field: "title", width: 150, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
       {id: "description", name: "Description", field: "description", width: 450, editor: Slick.Editors.LongText}
+    ];
+    var membership_types_columns = [
+      {id: "name", name: "Name", field: "name", width: 50, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
+      {id: "member_category", name: "Target", field: "member_category", width: 80, selectable: false, resizable: false},
+      {id: "is_for_local", name: "Local ?", width: 20, cssClass: "cell-local-member", field: "is_for_local", formatter: Slick.Formatters.Checkmark, editor: Slick.Editors.Checkbox},
+      {id: "duration", name: "Duration", width: 30, field: "duration", editor: Slick.Editors.Text},
+      {id: "fee", name: "Fee", width: 20, field: "fee", editor: Slick.Editors.Text},
+      {id: "description", name: "Description", field: "description", width: 100, editor: Slick.Editors.LongText}
     ];
     var options = {
       editable: true,
@@ -20,8 +31,11 @@
       enableColumnReorder: false
     };
     $.getJSON('/member_categories', function(data) {
-      create_load_and_display_editable_grid("#member_types",data, member_categories_columns, options);
+      create_load_and_display_editable_grid("#member_types",data, member_categories_columns, options, "member_categories", "member_category");
     });
+    /*$.getJSON('/membership_types', function(data) {
+      create_load_and_display_editable_grid_with_selectable_column("#membership_types",data, membership_types_columns, options, "membership_types", "membership_type","member_category","member_categories");
+    });*/
   });
 </script>
 <br>
@@ -35,7 +49,28 @@
       <p>Editable grid for CRUD actions on member types</p>
     </div>
     <div class="tab-pane" id="membership_types">
-      <p>Editable grid for CRUD actions on membership types</p>
+      
+      <table class="table table-hover table-condensed">
+  <tr>
+    <th>Name</th>
+    <th>Target</th>
+    <th>Local ?</th>
+    <th>Duration</th>
+    <th>Fee</th>
+    <th>Description</th>
+  </tr>
+
+<% @membership_types.each do |mtype| %>
+  <tr id="membership_type_<%= mtype.id %>">
+    <td><%= best_in_place mtype, :name, :type => :input %></td>
+    <td><%= best_in_place mtype, :member_category_id, :type => :select, :collection => MemberCategory.all.collect {|c| [c.id, c.title]}%></td>
+    <td><%= best_in_place mtype, :is_for_local, :type => :checkbox, :collection => ["No", "Yes"] %></td>
+    <td><%= best_in_place mtype, :duration, :type => :input %> months</td>
+    <td><%= best_in_place mtype, :fee, :type => :input, :display_with => :number_to_currency, :helper_options => {:unit => "€"} %></td>
+    <td><%= best_in_place mtype, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %></td>
+  </tr>
+<% end %>
+</table>
     </div>
   </div>
 </div>

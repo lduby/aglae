@@ -12,7 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require best_in_place
 //= require_tree .
+
+
 
 function hide_load_and_show_div(divname,url) {
   $(divname).hide();
@@ -177,9 +181,13 @@ function create_load_and_display_editable_grid_with_selectable_column(griddiv, d
   });
   grid.onClick.subscribe(function (e) {
       var cell = grid.getCellFromEvent(e);
-      if (grid.getColumns()[cell.cell].id == "priority") {
+      if (grid.getColumns()[cell.cell].id == selectable_column_id) {
+        $.getJSON('/'+selectable_data_controller, function(jsdata) {
+          alert(jsdata);
+        });
         var states = { "Low": "Medium", "Medium": "High", "High": "Low" };
-        data[cell.row].priority = states[data[cell.row].priority];
+        //data[cell.row].priority = states[data[cell.row].priority];
+        data[cell.row][cell.cell] = states[data[cell.row][cell.cell]];
         grid.updateRow(cell.row);
         e.stopPropagation();
       }

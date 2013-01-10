@@ -1,0 +1,29 @@
+
+<%= form_tag('/preferences/update_location', :method => 'put') %>
+  <table>
+  	<tr>
+      <td><%= label_tag :name %></td>
+      <td><%= text_field_tag :name, Aglae::Application.config.toy_library_name %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag :address %></td>
+      <td><%= text_field_tag :address, Aglae::Application.config.toy_library_address %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag :zipcode %></td>
+      <td><%= text_field_tag :zipcode, Aglae::Application.config.toy_library_zipcode %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag :city %></td>
+      <td><%= text_field_tag :city, Aglae::Application.config.toy_library_city %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag :phone %></td>
+      <td><%= telephone_field_tag :phone, Aglae::Application.config.toy_library_phone %></td>
+    </tr>
+    <tr>
+      <td><%= label_tag :email %></td>
+      <td><%= email_field_tag :email, Aglae::Application.config.toy_library_contact_email %></td>
+    </tr>
+  </table>
+  <%= submit_tag "Save", :confirm => "Are you sure?" %>

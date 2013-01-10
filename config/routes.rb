@@ -25,6 +25,7 @@ Aglae::Application.routes.draw do
   get 'home/dashboard'
   get 'calendar/index'
   get 'preferences/toy_library'
+  put 'preferences/update_location'
   get 'preferences/members_management'
   get 'preferences/games_management'
   get 'preferences/activities_management'

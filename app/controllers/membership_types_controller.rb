@@ -10,41 +10,20 @@ class MembershipTypesController < ApplicationController
   # PUT /membership_types/1
   # PUT /membership_types/1.json
   def update
-    logger.debug("update params sent by grid:")
-    logger.debug(params)
-    logger.debug("to be updated field: ")
-    logger.debug(params[:membership_type][:is_for_local])
     @membership_type = MembershipType.find(params["id"])
-=begin
-    if !params[:membership_type][:is_for_local].nil?
-      if params[:membership_type][:is_for_local] == "checked"
-        logger.debug("Updating is_for_local to true")
-        @membership_type.is_for_local = 1;
-        if @membership_type.save
-          @membership_types = MembershipType.all
-          respond_with(:status => :ok, :location => @membership_types)
-        else
-          respond_with(@membership_type.errors, :status => :unprocessable_entity)
-        end
-      end
-    elsif !params[:membership_type][:member_category].nil?
-=end
-
     if !params[:membership_type][:member_category].nil?
       @member_category = MemberCategory.find(params[:membership_type][:member_category])
       @membership_type.member_category = @member_category
       if @membership_type.save
-        @membership_types = MembershipType.all
-        respond_with(:status => :ok, :location => @membership_types)
+        redirect_to '/preferences/members_management#membership_types', :status => :ok, :notice => "Membership Type updated"
       else
-        respond_with(@membership_type.errors, :status => :unprocessable_entity)
+        redirect_to '/preferences/members_management#membership_types', :status => :unprocessable_entity, :notice => @membership_type.errors
       end
     else    
       if @membership_type.update_attributes(params[:membership_type])
-        @membership_types = MembershipType.all
-        respond_with(:status => :ok, :location => @membership_types)
+        redirect_to '/preferences/members_management#membership_types', :status => :ok, :notice => "Membership Type updated"
       else
-        respond_with(@membership_type.errors, :status => :unprocessable_entity)
+        redirect_to '/preferences/members_management#membership_types', :status => :unprocessable_entity, :notice => @membership_type.errors
       end
     end
   end
@@ -53,21 +32,30 @@ class MembershipTypesController < ApplicationController
   # POST /membership_types.json
   def create
     @membership_type = MembershipType.new(params[:membership_type])
+    @member_category = MemberCategory.find(params[:member_category_id])
+    @membership_type.member_category = @member_category
     if @membership_type.save
-      #@membership_types = MembershipType.all
-      respond_with({:status => "success"}, :location => "nil")
-      #respond_with(@membership_type, :status => :ok, :location => @membership_types) do |format|
-      #  format.json { head :ok }
-      #end
-
+      redirect_to '/preferences/members_management#membership_types', :notice => "Membership Type created"
     else
-      respond_with(@membership_types.errors, :status => :unprocessable_entity)
+      redirect_to '/preferences/members_management#membership_types', :notice => @membership_type.errors
+    end
+  end
+
+  # DELETE /membership_types/1
+  # DELETE /membership_types/1.json
+  def destroy
+    @membership_type = MembershipType.find(params[:id])
+    @membership_type.destroy
+
+    respond_to do |format|
+      format.html { redirect_to '/preferences/members_management#membership_types', :notice => "Membership Type deleted" }
+      format.json { head :no_content }
     end
   end
 
 
   def new
-  	logger.debug(params)
+    @membership_type = MembershipType.new
   end
 
   def toto

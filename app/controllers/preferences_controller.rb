@@ -12,6 +12,7 @@ class PreferencesController < ApplicationController
 		logger.debug('member_categories_select: ')
 		logger.debug(@member_categories_select)
 		@membership_types = MembershipType.all
+		@new_membership_type = MembershipType.new
 	end
   
 end

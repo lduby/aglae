@@ -1,54 +1,20 @@
 <script type="text/javascript">
-  function requiredFieldValidator(value) {
-    if (value == null || value == undefined || !value.length) {
-      return {valid: false, msg: "This is a required field"};
-    } else {
-      return {valid: true, msg: null};
-    }
-  }
-
   $(document).ready(function() {
     /* Activating Best In Place */
     jQuery(".best_in_place").best_in_place();
-
-    var member_categories_columns = [
-      {id: "title", name: "Title", field: "title", width: 150, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
-      {id: "description", name: "Description", field: "description", width: 450, editor: Slick.Editors.LongText}
-    ];
-    var membership_types_columns = [
-      {id: "name", name: "Name", field: "name", width: 50, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
-      {id: "member_category", name: "Target", field: "member_category", width: 80, selectable: false, resizable: false},
-      {id: "is_for_local", name: "Local ?", width: 20, cssClass: "cell-local-member", field: "is_for_local", formatter: Slick.Formatters.Checkmark, editor: Slick.Editors.Checkbox},
-      {id: "duration", name: "Duration", width: 30, field: "duration", editor: Slick.Editors.Text},
-      {id: "fee", name: "Fee", width: 20, field: "fee", editor: Slick.Editors.Text},
-      {id: "description", name: "Description", field: "description", width: 100, editor: Slick.Editors.LongText}
-    ];
-    var options = {
-      editable: true,
-      enableAddRow: true,
-      enableCellNavigation: true,
-      forceFitColumns: true,
-      enableColumnReorder: false
-    };
-    $.getJSON('/member_categories', function(data) {
-      create_load_and_display_editable_grid("#member_types",data, member_categories_columns, options, "member_categories", "member_category");
-    });
-    /*$.getJSON('/membership_types', function(data) {
-      create_load_and_display_editable_grid_with_selectable_column("#membership_types",data, membership_types_columns, options, "membership_types", "membership_type","member_category","member_categories");
-    });*/
   });
 </script>
 <br>
 <div class="tabbable tabs-left">
   <ul class="nav nav-tabs" id="preferencesTab">
-    <li class="active"><a href="#member_types" data-toggle="tab">Member Types</a></li>
-    <li class=""><a href="#membership_types" data-toggle="tab">Membership Types</a></li>
+    <li class="<%= if current_page?(:tab => 'member_types') then 'active' elsif current_page?(:tab => 'membership_types') then '' elsif current_page?(:controller => 'preferences', :action => 'members_management') then 'active' end %>"><a href="#member_types" data-toggle="tab">Member Types</a></li>
+    <li class="<%= 'active' if current_page?(:tab => 'membership_types') %>"><a href="#membership_types" data-toggle="tab">Membership Types</a></li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="member_types" style="width:600px;height:500px;">
+    <div class="<%= if current_page?(:tab => 'member_types') then 'tab-pane active' elsif current_page?(:tab => 'membership_types') then 'tab-pane' elsif current_page?(:controller => 'preferences', :action => 'members_management') then 'tab-pane active' end %>" id="member_types" style="width:600px;height:500px;">
       <p>Editable grid for CRUD actions on member types</p>
     </div>
-    <div class="tab-pane" id="membership_types">
+    <div class="<%= if current_page?(:tab => 'membership_types') then 'tab-pane active' else 'tab-pane' end %>" id="membership_types">
       <%= render "membership_types" %>
     </div>
   </div>

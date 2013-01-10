@@ -15,15 +15,15 @@ class MembershipTypesController < ApplicationController
       @member_category = MemberCategory.find(params[:membership_type][:member_category])
       @membership_type.member_category = @member_category
       if @membership_type.save
-        redirect_to '/preferences/members_management#membership_types', :status => :ok, :notice => "Membership Type updated"
+        redirect_to '/preferences/members_management?tab=membership_types', :status => :ok, :notice => "Membership Type updated"
       else
-        redirect_to '/preferences/members_management#membership_types', :status => :unprocessable_entity, :notice => @membership_type.errors
+        redirect_to '/preferences/members_management?tab=membership_types', :status => :unprocessable_entity, :notice => @membership_type.errors
       end
     else    
       if @membership_type.update_attributes(params[:membership_type])
-        redirect_to '/preferences/members_management#membership_types', :status => :ok, :notice => "Membership Type updated"
+        redirect_to '/preferences/members_management?tab=membership_types', :status => :ok, :notice => "Membership Type updated"
       else
-        redirect_to '/preferences/members_management#membership_types', :status => :unprocessable_entity, :notice => @membership_type.errors
+        redirect_to '/preferences/members_management?tab=membership_types', :status => :unprocessable_entity, :notice => @membership_type.errors
       end
     end
   end
@@ -35,9 +35,9 @@ class MembershipTypesController < ApplicationController
     @member_category = MemberCategory.find(params[:member_category_id])
     @membership_type.member_category = @member_category
     if @membership_type.save
-      redirect_to '/preferences/members_management#membership_types', :notice => "Membership Type created"
+      redirect_to '/preferences/members_management?tab=membership_types', :notice => "Membership Type created"
     else
-      redirect_to '/preferences/members_management#membership_types', :notice => @membership_type.errors
+      redirect_to '/preferences/members_management?tab=membership_types', :notice => @membership_type.errors
     end
   end
 
@@ -48,7 +48,7 @@ class MembershipTypesController < ApplicationController
     @membership_type.destroy
 
     respond_to do |format|
-      format.html { redirect_to '/preferences/members_management#membership_types', :notice => "Membership Type deleted" }
+      format.html { redirect_to '/preferences/members_management?tab=membership_types', :notice => "Membership Type deleted" }
       format.json { head :no_content }
     end
   end

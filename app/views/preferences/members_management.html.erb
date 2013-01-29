@@ -11,8 +11,8 @@
     <li class="<%= 'active' if current_page?(:tab => 'membership_types') %>"><a href="#membership_types" data-toggle="tab">Membership Types</a></li>
   </ul>
   <div class="tab-content">
-    <div class="<%= if current_page?(:tab => 'member_types') then 'tab-pane active' elsif current_page?(:tab => 'membership_types') then 'tab-pane' elsif current_page?(:controller => 'preferences', :action => 'members_management') then 'tab-pane active' end %>" id="member_types" style="width:600px;height:500px;">
-      <p>Editable grid for CRUD actions on member types</p>
+    <div class="<%= if current_page?(:tab => 'member_types') then 'tab-pane active' elsif current_page?(:tab => 'membership_types') then 'tab-pane' elsif current_page?(:controller => 'preferences', :action => 'members_management') then 'tab-pane active' end %>" id="member_types">
+      <%= render "member_categories" %>
     </div>
     <div class="<%= if current_page?(:tab => 'membership_types') then 'tab-pane active' else 'tab-pane' end %>" id="membership_types">
       <%= render "membership_types" %>

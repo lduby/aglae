@@ -1,16 +1,17 @@
 class PreferencesController < ApplicationController
 
   def members_management
-	@member_categories = MemberCategory.all
-	@member_categories_select = Array.new
-	@member_categories.each do |mcat|
-	  @cat = Array.new
-	  @cat << mcat.id
-	  @cat << mcat.title
-	  @member_categories_select << @cat
-	end
-	@membership_types = MembershipType.all
-	@new_membership_type = MembershipType.new
+  	@member_categories = MemberCategory.all
+  	@member_categories_select = Array.new
+  	@member_categories.each do |mcat|
+  	  @cat = Array.new
+  	  @cat << mcat.id
+  	  @cat << mcat.title
+  	  @member_categories_select << @cat
+  	end
+  	@membership_types = MembershipType.all
+  	@new_membership_type = MembershipType.new
+    @new_member_category = MemberCategory.new
   end
 
   def toy_library

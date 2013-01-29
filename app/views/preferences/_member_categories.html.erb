@@ -1,0 +1,25 @@
+<table class="table table-hover table-condensed">
+  <tr>
+    <th>Title</th>
+    <th>Group ?</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+
+<% @member_categories.each do |mcat| %>
+  <tr id="member_category_<%= mcat.id %>">
+    <td><%= best_in_place mcat, :title, :type => :input %></td>
+    <td><%= best_in_place mcat, :is_group, :type => :checkbox, :collection => ["No", "Yes"] %></td>
+    <td><%= best_in_place mcat, :description, :type => :textarea, :ok_button => 'Save', :cancel_button => 'Cancel' %></td>
+    <td><%= link_to "Delete", member_category_path(mcat), :confirm => "Are you sure?", :method=>:delete %>
+  </tr>
+<% end %>
+</table>
+<div id="new_member_category">
+  <%= form_for @new_member_category, :html => {:class => "form-inline", :id => "new_member_category_form"} do |f| %>
+    <b>New: </b>
+    <%= f.text_field :title, :placeholder => "Title" %>
+    <%= f.check_box :is_group %> Group ? 
+    <%= f.submit %>
+  <% end %>
+</div>

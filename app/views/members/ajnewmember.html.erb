@@ -1,8 +1,6 @@
-
-
-<h1>New Member</h1>
 <script>
 $(document).ready(function() {
+ $("#group_details").hide();
  $("#MemberFormSubmit").click(
   function () {  
     $.ajax({type:'POST', url: '/members/ajcreate', data:$('#new_member').serialize(), success: function(response) {
@@ -16,23 +14,84 @@ $(document).ready(function() {
    }
   )
  });
+ $("#member_category_id").change(function() {
+ 	$.get("/member_categories/"+$(this).val(), function(data) {
+ 		if (data["is_group"]) {
+ 			$("#group_details").show();
+ 		}
+ 		else {
+ 			$("#group_details").hide();
+ 		}
+		
+	}, "json");
+ });
 </script>
 
 <%= form_for @member do |f| %>
-<table>
-<tr><td><%= f.label :lastname, "Lastname" %></td><td><%= f.text_field :lastname %></td></tr>
-<tr><td><%= f.label :firstname, "firstname" %></td><td><%= f.text_field :firstname %></td></tr>
-<tr><td><%= f.label "Email" %></td><td><input type="text" id="member_email" name="email" /></td></tr>
-<tr><td><%= f.label :organization, "organization" %></td><td><%= f.text_field :organization %></td></tr>
-<tr><td><%= f.label :occupation, "occupation" %></td><td><%= f.text_field :occupation %></td></tr>
-<tr><td><%= f.label :birthdate, "birthdate" %></td><td><%= f.date_select :birthdate %></td></tr>
-<tr><td><%= f.label :address, "address" %></td><td><%= f.text_field :address %></td></tr>
-<tr><td><%= f.label :zipcode, "zipcode" %></td><td><%= f.text_field :zipcode %></td></tr>
-<tr><td><%= f.label :city, "city" %></td><td><%= f.text_field :city %></td></tr>
-<tr><td><%= f.label :phone, "phone" %></td><td><%= f.text_field :phone %></td></tr>
-<tr><td><%= f.label :member_type, "type" %></td><td><%= f.text_field :member_type %></td></tr>
-</table>
-<%= f.submit "Create", :id => "MemberFormSubmit" %>
+<div id="member_type_select">
+	<fieldset>
+		<legend>Member Type</legend>
+		<div>
+			<%= select_tag(:member_category_id, options_for_select(MemberCategory.all.collect {|c| [c.title, c.id]})) %>
+		</div>
+	</fieldset>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<div id="group_details">
+			<fieldset>
+				<legend>Group Information</legend>
+				<div>
+					<%= f.label :organization, "Organization Name" %>
+					<%= f.text_field :organization %>
+				</div>
+			</fieldset>
+		</div>
+		<div id="individual_details">
+			<fieldset>
+				<legend>Personal Information</legend>
+				<div>
+					<%= f.label :lastname, "Lastname" %>
+					<%= f.text_field :lastname %>
+				</div>
+				<div>
+					<%= f.label :firstname, "Firstname" %>
+					<%= f.text_field :firstname %>
+				</div>
+				<div>
+					<%= f.label "Email" %>
+					<input type="text" id="member_email" name="email" />
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	<div class="span6">
+		<div id="contact_details">
+			<fieldset>
+				<legend>Contact details</legend>
+				<div>
+					<%= f.label :address, "Address" %>
+					<%= f.text_field :address %>
+				</div>
+				<div>
+					<%= f.label :zipcode, "Zipcode" %>
+					<%= f.text_field :zipcode %>
+				</div>
+				<div>
+					<%= f.label :city, "City" %>
+					<%= f.text_field :city %>
+				</div>
+				<div>
+					<%= f.label :phone, "Phone" %>
+					<%= f.text_field :phone %>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</div>
+<div>
+	<%= f.submit "Create", :id => "MemberFormSubmit" %>
+</div>
 <% end %>
 
 

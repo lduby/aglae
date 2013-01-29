@@ -42,6 +42,8 @@ class MembersController < ApplicationController
   
   def create
     @member = Member.new(params[:member])
+    @member_category = MemberCategory.find(params[:member_category_id])
+    @member.member_category = @member_category
     if @member.save 
       flash[:notice] = "Successfully created member"
     end
@@ -49,16 +51,12 @@ class MembersController < ApplicationController
   
   def ajcreate
     @member = Member.new(params[:member])
+    @member_category = MemberCategory.find(params[:member_category_id])
+    @member.member_category = @member_category
     if @member.save 
       @msg = "saved successfully"
       if params["email"] != ""
-        @user = User.new(:email => params["email"])
-        if @user.save
-          @user.member_profile = @member
-          @msg << " and corresponding user successfullty created"
-        else
-          @msg << " but corresponding user not created"
-        end
+        create_user_account(params["email"])
       end
     else 
       @msg = "error on saving member"  
@@ -109,6 +107,19 @@ class MembersController < ApplicationController
     @member = Member.find(params['id'])
     @child = Child.new
     render :layout => false
+  end
+
+  def create_user_account(email)
+=begin
+    @user = User.new(:email => params["email"])
+    if @user.save
+      @user.member_profile = @member
+      @msg << " and corresponding user successfullty created"
+    else
+      @msg << " but corresponding user not created"
+    end
+=end
+
   end
   
 end

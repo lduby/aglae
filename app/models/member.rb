@@ -6,7 +6,7 @@ class Member < ActiveRecord::Base
   has_many :borrowings
   has_many :board_entries, :order => 'entered_at DESC'
   has_many :voluntary_works, :order => 'volunteered_at ASC'
-  attr_accessible :address, :birthdate, :city, :firstname, :lastname, :occupation, :organization, :phone, :member_type, :zipcode
+  attr_accessible :address, :birthdate, :city, :firstname, :lastname, :occupation, :organization, :phone, :member_category_id, :zipcode
   
   def name
     "#{firstname} #{lastname}"

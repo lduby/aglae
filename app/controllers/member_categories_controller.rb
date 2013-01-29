@@ -7,6 +7,12 @@ class MemberCategoriesController < ApplicationController
     respond_with(@member_categories)
   end
 
+  respond_to :json
+  def show 
+    @member_category = MemberCategory.find(params["id"])
+    respond_with(@member_category)
+  end
+
   # PUT /member_categories/1
   # PUT /member_categories/1.json
   def update

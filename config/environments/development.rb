@@ -14,7 +14,29 @@ Aglae::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.raise_delivery_errors = false
+
+  # ActionMailer Config
+  
+    # en dev, l'host c'est localhost
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+    config.action_mailer.delivery_method = :smtp
+  
+    # change to true to allow email to be sent during development
+    config.action_mailer.perform_deliveries = true
+ 
+    # pour récupérer les erreurs lors d'un envoi de mail
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default :charset => "utf-8"
+ 
+    config.action_mailer.smtp_settings = {
+      :address => "smtp.ldjm.fr", # par exemple pour Google : smtp.gmail.com
+      :port => 587, # généralement utilisé par Google
+      :user_name => "laet",
+      :password => "",
+      :authentication => :login, # méthode d'authentification, attention :plain enverra votre mot de passe en clair
+      :enable_starttls_auto => true # Un peu de sécurité, ça fait jamais de mal <img src="/assets/smileys/ct2c_happy.png">
+    }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

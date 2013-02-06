@@ -1,0 +1,33 @@
+<% if !@member.id.nil? %>
+	<div id="member_children" class="page-header">
+		<h4>Children</h4>
+	</div>
+	<table class="table table-hover table-condensed">
+	  <tr>
+	    <th>Firstname</th>
+	    <th>Lastname</th>
+	    <th>Birthdate</th>
+	    <th>Sex</th>
+	    <th></th>
+	  </tr>
+
+	<% @member.children.each do |child| %>
+	  <tr id="member_child_<%= child.id %>">
+	    <td><%= best_in_place child, :firstname, :type => :input %></td>
+	    <td><%= best_in_place child, :lastname, :type => :input %></td>
+	    <td><%= best_in_place child, :birthdate, :type => :date %></td>
+	    <td><%= best_in_place child, :sex, :type => :select, :collection => ["Female", "Male"] %></td>
+	    <td><%= link_to "Delete", member_children_path(@member, child), :confirm => "Are you sure?", :method=>:delete %>
+	  </tr>
+	<% end %>
+	</table>
+
+	<%= form_for [@member, @member.children.build], :html => {:class => "form-inline", :id => "new_member_child_form"} do |f| %>
+		<b>New: </b>
+		<%= f.text_field :lastname, :placeholder => "Lastname" %>
+		<%= f.text_field :firstname, :placeholder => "Firstname"  %>
+		Birthdate: <%= f.date_select :birthdate %>
+		<%= f.select(:sex, options_for_select([['Female', 'Female'], ['Male', 'Male']])) %>
+		<%= f.submit "Create", :id => "MemberChildFormSubmit" %>
+	<% end %>
+<% end %>

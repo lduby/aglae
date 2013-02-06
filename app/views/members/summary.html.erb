@@ -1,0 +1,11 @@
+<div id="member_name" class="page-header">
+	<h4><%= @member.member_category.is_group ? @member.organization : @member.name %></h4><span class="label"><%= @member.member_category.title %></span>
+	<% if @member.member_category.is_group %>
+		<small><%= @member.name %></small>
+	<% end %>
+</div>
+<div id="member_details">
+	<div id="member_contact"><%= " Email - " + @member.phone %></div>
+	<div id="member_address1"><%= @member.address %></div>
+	<div id="member_address2"><%= @member.zipcode + " - " + @member.city %></div>
+</div>

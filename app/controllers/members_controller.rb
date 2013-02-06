@@ -58,15 +58,28 @@ class MembersController < ApplicationController
       if params["email"] != ""
         create_user_account(params["email"])
       end
+      flash[:notice] = "Member was created successfully."
+      respond_with(@member)
     else 
       @msg = "error on saving member"  
+      respond_with(@member.errors, :status => :unprocessable_entity)
     end
-    render :layout => false
+    #render :layout => false
   end 
+
+  def ajnewmember_children
+    @member = Member.find(params['id'])
+    @child = Child.new
+  end
 
   def jsshow
     @member = Member.find(params['id'])
     render :show, :layout => false
+  end
+
+  def summary
+    @member = Member.find(params['id'])
+    render :layout => false
   end
   
   def edit

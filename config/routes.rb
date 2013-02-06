@@ -8,6 +8,7 @@ Aglae::Application.routes.draw do
   #root :to => 'members#index'
   root :to => 'passthrough#index'
   get 'members/ajnewmember'
+  get 'members/ajnewmember_children'
   get 'members/list'  
   get 'members/search'
   post 'members/ajcreate'
@@ -36,6 +37,7 @@ Aglae::Application.routes.draw do
     member do
       get "jsshow"
       get "show_profile"
+      get "summary"
     end
   end
   resources :member_categories

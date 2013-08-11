@@ -7,17 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="navbar navbar-fixed-top ">
-    <div class="navbar-inner">
-      <div class="container">
-        <%= render 'layouts/navigation' %>
+  <div class="header">
+    <div class="navbar navbar-fixed-top ">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <%= render 'layouts/navigation' %>
+        </div>
+      </div><!-- /navbar-inner -->
+    </div><!-- /navbar -->
+  </div><!-- /header -->
+  <div class="main">
+    <div class="menu">
+    </div><!-- /menu -->
+    <div class="content">
+      <div id='notice'>
+        <%= render 'layouts/messages' %> 
       </div>
-    </div><!-- /navbar-inner -->
-  </div><!-- /navbar -->
-<div id='notice'>
-  <%= render 'layouts/messages' %> 
-</div>
-<%= yield %>
-
+      <%= yield %>      
+    </div><!-- /content -->
+  </div><!-- /main -->
+  <div class="footer navbar-fixed-bottom">
+    <div class="footer-inner">
+      <h5>Powered by Aglaé, designed and built by @lduby</h5>
+    </div><!-- /footer-inner -->
+  </div><!-- /footer -->
 </body>
 </html>

@@ -20,3 +20,19 @@ body {
     margin: -2px 0 0 10px;
     font-size: 18px;
 }
+
+.header {
+	border-bottom: 1px solid #777;
+}
+
+.footer {
+	padding: 8px 20px 5px 20px;
+	font-size: 12px;
+	color: #999999;
+	background-color: #2c2c2c;
+	border-top: 1px solid #777;
+}
+
+.footer-inner {
+	
+}

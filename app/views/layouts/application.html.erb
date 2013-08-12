@@ -7,29 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="header">
-    <div class="navbar navbar-fixed-top ">
+  <!-- <div class="container-fluid"> -->
+    <div id="header" class="navbar navbar-fixed-top ">
       <div class="navbar-inner">
-        <div class="container-fluid">
-          <%= render 'layouts/navigation' %>
+        <div class="row-fluid">
+          <%= render 'layouts/header' %>
         </div>
       </div><!-- /navbar-inner -->
-    </div><!-- /navbar -->
-  </div><!-- /header -->
-  <div class="main">
-    <div class="menu">
-    </div><!-- /menu -->
-    <div class="content">
-      <div id='notice'>
-        <%= render 'layouts/messages' %> 
+    </div><!-- /header -->
+    <div id="main">
+      <div  class="row-fluid">
+      <div id="sidebar" class="span2 sidebar nav-collapse collapse">
+        <%= render 'layouts/sidebar-navigation' %>
+      </div><!-- /sidebar -->
+      <div id="content" class="span10NoGutter content">
+        <div id='notice'>
+          <%= render 'layouts/messages' %> 
+        </div>
+        <%= yield %>  
+      </div><!-- /content -->
       </div>
-      <%= yield %>      
-    </div><!-- /content -->
-  </div><!-- /main -->
-  <div class="footer navbar-fixed-bottom">
-    <div class="footer-inner">
-      <h5>Powered by Aglaé, designed and built by @lduby</h5>
-    </div><!-- /footer-inner -->
-  </div><!-- /footer -->
+    </div><!-- /main -->
+    <div id="footer" class="navbar-fixed-bottom">
+      <div class="footer-inner">
+        <div class="row-fluid">
+          <h5>Powered by Aglaé, designed and built by @lduby</h5>
+        </div>
+      </div><!-- /footer-inner -->
+    </div><!-- /footer -->
+  <!--</div> /container -->
 </body>
 </html>

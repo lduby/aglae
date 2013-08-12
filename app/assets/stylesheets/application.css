@@ -12,6 +12,9 @@
  *= require_tree .
 */
 
+.row-fluid [class*="NoGutter"] { margin-left:0 }
+.row-fluid .span10NoGutter { width: 85.43334% !important}
+
 body {
   padding: 40px
 }
@@ -21,11 +24,15 @@ body {
     font-size: 18px;
 }
 
-.header {
+#header {
 	border-bottom: 1px solid #777;
 }
 
-.footer {
+#header .search-query {
+	padding-right: 30px !important;
+}
+
+#footer {
 	padding: 8px 20px 5px 20px;
 	font-size: 12px;
 	color: #999999;
@@ -33,6 +40,186 @@ body {
 	border-top: 1px solid #777;
 }
 
-.footer-inner {
-	
+#main {
+	position: fixed;
+	background-color: #3c3c3c;
+	left: 0;
+	right: 0;
+}
+
+#sidebar {
+	margin-left: 0px;
+}
+
+#content {
+	background-color: #ffffff;
+	margin-left: 0px;
+	margin-right: 0px;
+	min-height: 1200px;
+}
+/*** KeenThemes Conquer Default CSS ***/
+
+#sidebar > ul > li > a {
+  border-top: 1px solid #424242 !important;
+  border-bottom: 1px solid #282828 !important;
+  color: #d1d0d0 !important;
+  text-shadow: 0 1px 1px #333 !important;
+}
+
+#sidebar > ul > li a i {
+   color: #999 !important;
+}
+
+#sidebar > ul > li >a:hover, #sidebar > ul > li:hover>a {
+  color: #fff !important;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+  background: #1e1f21;
+  background: -webkit-linear-gradient(bottom, #1e1f21, #232527);
+  background: -ms-linear-gradient(bottom, #1e1f21, #232527); 
+  background: -moz-linear-gradient(bottom, #1e1f21, #232527);
+  background: -o-linear-gradient(bottom, #1e1f21, #232527);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1e1f21', endColorstr='#ff232527', GradientType=0);
+  border-top: 1px solid #303234;
+  border-bottom: 1px solid #161718;
+}
+
+#sidebar > ul > li.active > a{
+  background: #252728 !important;
+  border-top: 1px solid #1c1d1e !important;
+  border-bottom: 1px solid #242628 !important;
+}  
+
+#sidebar > ul > li > ul.sub > li > a {
+  color: #ccc;
+  text-shadow: 0 1px 1px #000;
+}
+
+#sidebar > ul > li > ul.sub > li.active > a, #sidebar > ul > li > ul.sub > li > a:hover {
+  color: #fff !important;
+  background: #534f4e !important;  
+   -webkit-border-radius: 2px !important;
+        -moz-border-radius: 2px !important;
+             border-radius: 2px !important;
+}
+
+#sidebar > ul > li > ul.sub > li > a:hover {
+  background: #534f4e !important;
+}
+
+/* sub menu bg color on hover menu item */
+.sidebar-closed #sidebar > ul > li:hover .sub {
+  background-color: #2a2b2e;
+}
+
+/*** KeenThemes Conquer Style CSS ***/ 
+
+#sidebar > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 0;
+  padding: 0; 
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+}
+
+#sidebar > ul > li {
+  display: block;
+  margin: 0;
+  padding: 0; 
+  border: 0px;
+}
+
+#sidebar > ul > li > a {
+  display: block;
+  position: relative;
+  margin: 0;
+  border: 0px;
+  padding: 10px 15px;
+  -webkit-border-radius: 0px !important;
+     -moz-border-radius: 0px !important;
+          border-radius: 0px !important;   
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#sidebar > ul > li a i {
+  color:#eaeaea;
+  font-size: 18px; 
+}
+
+#sidebar > ul > li.active > a{
+  border: none; 
+}
+
+#sidebar > ul > li.active {
+  border-right: 4px solid #d12610;
+}
+  
+#sidebar > ul > li.active > a .arrow {
+  margin-right: 1px;
+}
+
+#sidebar > ul > li.active > a .arrow.open {
+  margin-right: 0px;
+}
+
+
+#sidebar ul > li > a .arrow {
+   float: right;
+   margin-top: 6px;
+   margin-right: 5px;
+   width: 0; 
+   height: 0;
+   border-right: 5px solid #f3f3f3;
+   border-top: 4px solid transparent;
+   border-bottom: 4px solid transparent;
+}
+
+#sidebar > ul > li > a .arrow.open {
+  float: right;
+  margin-top: 10px;
+  margin-right: 3px;
+  width: 0; 
+  height: 0;
+  border-top: 5px solid #f3f3f3;
+  border-left: 4px solid transparent; 
+  border-right: 4px solid transparent; 
+}
+
+#sidebar > ul > li > ul.sub {
+  display: none;
+  list-style: none;
+  clear: both;
+  margin: 8px 0px 8px 20px;
+}
+
+#sidebar > ul > li.active > ul.sub {
+  display: block;
+}
+
+#sidebar > ul > li > ul.sub > li {
+  background: none !important;
+  padding: 0px;
+}
+
+#sidebar > ul > li > ul.sub > li > a {
+  display: block;
+  position: relative;
+  margin: 2px 40px 2px 0;
+  padding: 4px 15px;
+  color: #ccc;
+  text-decoration: none;
+  text-shadow: 0 1px 1px #000;
+  font-size: 13px;
+  font-weight: normal;
+  background: none !important;
+}
+
+#sidebar > ul > li > ul.sub > li.active > a, #sidebar > ul > li > ul.sub > li > a:hover { 
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
 }

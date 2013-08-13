@@ -32,6 +32,18 @@ body {
 	padding-right: 30px !important;
 }
 
+#header .login-form {
+	position: relative;
+	float: right;
+	margin-top: 6px;
+	margin-bottom: 0;
+	padding-right: 20px;
+}
+
+.navbar-fixed-top .navbar-inner {
+	padding-left: 20px !important;
+}
+
 #footer {
 	padding: 8px 20px 5px 20px;
 	font-size: 12px;

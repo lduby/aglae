@@ -10,12 +10,11 @@
     <input class="search-query" placeholder="Search" type="text">
 </form>
 
-<ul class="nav pull-right">
-    <% if !user_signed_in? %>
-      <li><%= link_to('Login', new_user_session_path)  %></li>
-      <li class="divider-vertical"></li>
-      <li><%= link_to('Sign up', new_user_registration_path) %></li>
-    <% else %>
+
+<% if !user_signed_in? %>
+	<%= render '/devise/sessions/form-inline' %>
+<% else %>
+    <ul class="nav pull-right">
       <div class="btn-group">
         <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
           <img class="icon-user">
@@ -36,5 +35,5 @@
               
         </ul>
       </div>
-    <% end %>
   </ul>
+<% end %>

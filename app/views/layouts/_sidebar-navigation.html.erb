@@ -5,20 +5,20 @@
       <span class="title">Dashboard</span>
     </a>
   </li>
-  <li>
+  <li class="<%= 'active' if current_page?(members_path) %>">
     <a href="/members">
       <span class="icon-group"></span> 
       <span class="title">Members</span>
     </a>
   </li>
-  <li>
+  <li class="<%= 'active' if current_page?(games_path) %>">
     <a href="/games">
       <!-- <span class="icon-puzzle-piece"></span>  -->
       <span class="icon-th"></span> 
       <span class="title">Catalog</span>
     </a>
   </li>
-  <li>
+  <li class="<%= 'active' if current_page?(calendar_index_path) %>">
     <a href="/calendar/index">
       <span class="icon-calendar"></span> 
       <span class="title">Calendar</span>

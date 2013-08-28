@@ -1,0 +1,19 @@
+<div id="contact" class="well sidebarwell span10">
+  <h4><%= Aglae::Application.config.toy_library_name %></h4>
+  <%= Aglae::Application.config.toy_library_address %>
+  <%= Aglae::Application.config.toy_library_zipcode.to_s + Aglae::Application.config.toy_library_city.to_s %> 
+  <%= Aglae::Application.config.toy_library_phone %> 
+</div>
+<div id="openings" class="well sidebarwell span10">
+  <h4>Horaires</h4>
+  <br>
+  <% if !@openings.nil? %>
+    <% @openings.each do |opening| %>
+      <p><%= opening %></p>
+    <% end %>
+  <% end %> 
+</div>
+<div id="news" class="well sidebarwell span10">
+  <h4>Actualités</h4>
+  <br>
+</div>

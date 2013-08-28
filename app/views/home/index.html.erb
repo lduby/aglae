@@ -1,89 +1,66 @@
 <br/>
 <br/>
-<!-- <div class="container-fluid"> -->
-  <div class="row-fluid">
-    <div class="span3">
-      <div id="contact" class="well">
-        <h4><%= Aglae::Application.config.toy_library_name %></h4>
-      </div>
-      <div id="openings" class="well">
-        <h4>Horaires</h4>
-        <br>
-        <% if !@openings.nil? %>
-          <% @openings.each do |opening| %>
-            <p><%= opening %></p>
-          <% end %>
-        <% end %> 
-      </div>
-      <div id="news" class="well">
-        <h4>Actualités</h4>
-        <br>
-      </div>
-    </div>
-    <div class="span9">
-      
-        <div class="myaccordian">
-          <ul>
-            <li>
-              <div class="myaccordian_image_title">
-                <a href="#">Jouer</a>
-              </div>
-              <!-- <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/> -->
-              <a href="#">
-                <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/>
-              </a>
-            </li>
-            <li>
-              <div class="myaccordian_image_title">
-                <a href="#">Emprunter</a>
-              </div>
-              <!-- <img src="http://thecodeplayer.com/uploads/media/40Ly3VB.jpg"/> -->
-              <a href="#">
-                <img src="http://thecodeplayer.com/uploads/media/40Ly3VB.jpg"/>
-              </a>
-            </li>
-            <li>
-              <div class="myaccordian_image_title">
-                <a href="#">Découvrir</a>
-              </div>
-              <a href="#">
-                <img src="http://thecodeplayer.com/uploads/media/2rT2vdx.jpg"/>
-              </a>
-            </li>
-            <li>
-              <div class="myaccordian_image_title">
-                <a href="#">Se divertir</a>
-              </div>
-              <a href="#">
-                <img src="http://thecodeplayer.com/uploads/media/00kih8g.jpg"/>
-              </a>
-            </li>
-            <li>
-              <div class="myaccordian_image_title">
-                <a href="#">Rencontrer</a>
-              </div>
-              <a href="#">
-                <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <br/>
 
-      
-      <div class="row-fluid">
-        <div class="span6">
-          <h2>Présentation</h2>
-          <p><%= Aglae::Application.config.toy_library_presentation_text %></p>
-          <p><a class="btn">View details</a></p>
+<div class="row-fluid paddedrow">
+  <div class="myaccordian">
+    <ul>
+      <li>
+        <div class="myaccordian_image_title">
+          <a href="#">Jouer</a>
         </div>
-        <div class="span6">
-          <h2>Fonctionnement</h2>
-          <p><%= Aglae::Application.config.toy_library_functioning_text %></p>
-          <p><a class="btn" href="#">View details</a></p>
+        <!-- <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/> -->
+        <a href="#">
+          <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/>
+        </a>
+      </li>
+      <li>
+        <div class="myaccordian_image_title">
+          <a href="#">Emprunter</a>
         </div>
-      </div>
-    </div>
+        <!-- <img src="http://thecodeplayer.com/uploads/media/40Ly3VB.jpg"/> -->
+        <a href="#">
+          <img src="http://thecodeplayer.com/uploads/media/40Ly3VB.jpg"/>
+        </a>
+      </li>
+      <li>
+        <div class="myaccordian_image_title">
+          <a href="#">Découvrir</a>
+        </div>
+        <a href="#">
+          <img src="http://thecodeplayer.com/uploads/media/2rT2vdx.jpg"/>
+        </a>
+      </li>
+      <li>
+        <div class="myaccordian_image_title">
+          <a href="#">Se divertir</a>
+        </div>
+        <a href="#">
+          <img src="http://thecodeplayer.com/uploads/media/00kih8g.jpg"/>
+        </a>
+      </li>
+      <li>
+        <div class="myaccordian_image_title">
+          <a href="#">Rencontrer</a>
+        </div>
+        <a href="#">
+          <img src="http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg"/>
+        </a>
+      </li>
+    </ul>
   </div>
-<!-- </div> -->
+  <br/>
+</div>
 
+<div class="row-fluid paddedrow">
+  <div class="span3">
+    <h2>Présentation</h2>
+    <p><%= Aglae::Application.config.toy_library_presentation_text %></p>
+    <p><a class="btn">View details</a></p>
+  </div>
+  <div class="span3">
+    <h2>Fonctionnement</h2>
+    <p><%= Aglae::Application.config.toy_library_functioning_text %></p>
+    <p><a class="btn" href="#">View details</a></p>
+  </div>
+</div>
+<br/>

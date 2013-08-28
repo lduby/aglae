@@ -17,9 +17,13 @@
     </div><!-- /header -->
     <div id="main">
       <div  class="row-fluid">
-      <div id="sidebar" class="span2 sidebar nav-collapse collapse">
-        <%= render 'layouts/sidebar-navigation' %>
-      </div><!-- /sidebar -->
+        <div id="sidebar" class="span2 sidebar nav-collapse collapse">
+          <% if user_signed_in? %>
+            <%= render 'layouts/sidebar-navigation' %>
+          <% else %>
+            <%= render 'layouts/sidebar-guest' %>
+          <% end %>
+        </div><!-- /sidebar -->
       <div id="content" class="span10NoGutter content">
         <div id='notice'>
           <%= render 'layouts/messages' %> 

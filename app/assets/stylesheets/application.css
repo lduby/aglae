@@ -59,7 +59,7 @@ body {
 	right: 0;
 }
 
-#sidebar {
+.sidebar {
 	margin-left: 0px;
 }
 
@@ -69,20 +69,30 @@ body {
 	margin-right: 0px;
 	min-height: 1200px;
 }
+
+.paddedrow {
+	padding-left: 40px;
+}
+
+.sidebarwell {
+	margin-left: 10px !important;
+	margin-top: 15px !important;
+}
+
 /*** KeenThemes Conquer Default CSS ***/
 
-#sidebar > ul > li > a {
+.sidebar > ul > li > a {
   border-top: 1px solid #424242 !important;
   border-bottom: 1px solid #282828 !important;
   color: #d1d0d0 !important;
   text-shadow: 0 1px 1px #333 !important;
 }
 
-#sidebar > ul > li a i {
+.sidebar > ul > li a i {
    color: #999 !important;
 }
 
-#sidebar > ul > li >a:hover, #sidebar > ul > li:hover>a {
+.sidebar > ul > li >a:hover, .sidebar > ul > li:hover>a {
   color: #fff !important;
   text-shadow: 0 1px 0 rgba(0, 0, 0, .25);
   background: #1e1f21;
@@ -95,18 +105,18 @@ body {
   border-bottom: 1px solid #161718;
 }
 
-#sidebar > ul > li.active > a{
+.sidebar > ul > li.active > a{
   background: #252728 !important;
   border-top: 1px solid #1c1d1e !important;
   border-bottom: 1px solid #242628 !important;
 }  
 
-#sidebar > ul > li > ul.sub > li > a {
+.sidebar > ul > li > ul.sub > li > a {
   color: #ccc;
   text-shadow: 0 1px 1px #000;
 }
 
-#sidebar > ul > li > ul.sub > li.active > a, #sidebar > ul > li > ul.sub > li > a:hover {
+.sidebar > ul > li > ul.sub > li.active > a, .sidebar > ul > li > ul.sub > li > a:hover {
   color: #fff !important;
   background: #534f4e !important;  
    -webkit-border-radius: 2px !important;
@@ -114,18 +124,18 @@ body {
              border-radius: 2px !important;
 }
 
-#sidebar > ul > li > ul.sub > li > a:hover {
+.sidebar > ul > li > ul.sub > li > a:hover {
   background: #534f4e !important;
 }
 
 /* sub menu bg color on hover menu item */
-.sidebar-closed #sidebar > ul > li:hover .sub {
+.sidebar-closed .sidebar > ul > li:hover .sub {
   background-color: #2a2b2e;
 }
 
 /*** KeenThemes Conquer Style CSS ***/ 
 
-#sidebar > ul {
+.sidebar > ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -136,14 +146,14 @@ body {
           border-radius: 0px;
 }
 
-#sidebar > ul > li {
+.sidebar > ul > li {
   display: block;
   margin: 0;
   padding: 0; 
   border: 0px;
 }
 
-#sidebar > ul > li > a {
+.sidebar > ul > li > a {
   display: block;
   position: relative;
   margin: 0;
@@ -157,29 +167,29 @@ body {
   font-weight: normal;
 }
 
-#sidebar > ul > li a i {
+.sidebar > ul > li a i {
   color:#eaeaea;
   font-size: 18px; 
 }
 
-#sidebar > ul > li.active > a{
+.sidebar > ul > li.active > a{
   border: none; 
 }
 
-#sidebar > ul > li.active {
+.sidebar > ul > li.active {
   border-right: 4px solid #d12610;
 }
   
-#sidebar > ul > li.active > a .arrow {
+.sidebar > ul > li.active > a .arrow {
   margin-right: 1px;
 }
 
-#sidebar > ul > li.active > a .arrow.open {
+.sidebar > ul > li.active > a .arrow.open {
   margin-right: 0px;
 }
 
 
-#sidebar ul > li > a .arrow {
+.sidebar ul > li > a .arrow {
    float: right;
    margin-top: 6px;
    margin-right: 5px;
@@ -190,7 +200,7 @@ body {
    border-bottom: 4px solid transparent;
 }
 
-#sidebar > ul > li > a .arrow.open {
+.sidebar > ul > li > a .arrow.open {
   float: right;
   margin-top: 10px;
   margin-right: 3px;
@@ -201,23 +211,23 @@ body {
   border-right: 4px solid transparent; 
 }
 
-#sidebar > ul > li > ul.sub {
+.sidebar > ul > li > ul.sub {
   display: none;
   list-style: none;
   clear: both;
   margin: 8px 0px 8px 20px;
 }
 
-#sidebar > ul > li.active > ul.sub {
+.sidebar > ul > li.active > ul.sub {
   display: block;
 }
 
-#sidebar > ul > li > ul.sub > li {
+.sidebar > ul > li > ul.sub > li {
   background: none !important;
   padding: 0px;
 }
 
-#sidebar > ul > li > ul.sub > li > a {
+.sidebar > ul > li > ul.sub > li > a {
   display: block;
   position: relative;
   margin: 2px 40px 2px 0;
@@ -230,7 +240,7 @@ body {
   background: none !important;
 }
 
-#sidebar > ul > li > ul.sub > li.active > a, #sidebar > ul > li > ul.sub > li > a:hover { 
+.sidebar > ul > li > ul.sub > li.active > a, .sidebar > ul > li > ul.sub > li > a:hover { 
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
